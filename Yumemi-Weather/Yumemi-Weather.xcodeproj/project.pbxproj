@@ -1,0 +1,598 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CDF185962665E9720075F1C1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF185952665E9720075F1C1 /* AppDelegate.swift */; };
+		CDF185982665E9720075F1C1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF185972665E9720075F1C1 /* SceneDelegate.swift */; };
+		CDF1859A2665E9720075F1C1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF185992665E9720075F1C1 /* ViewController.swift */; };
+		CDF1859D2665E9720075F1C1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDF1859B2665E9720075F1C1 /* Main.storyboard */; };
+		CDF1859F2665E9730075F1C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDF1859E2665E9730075F1C1 /* Assets.xcassets */; };
+		CDF185A22665E9730075F1C1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDF185A02665E9730075F1C1 /* LaunchScreen.storyboard */; };
+		CDF185AD2665E9730075F1C1 /* Yumemi_WeatherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF185AC2665E9730075F1C1 /* Yumemi_WeatherTests.swift */; };
+		CDF185B82665E9740075F1C1 /* Yumemi_WeatherUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF185B72665E9740075F1C1 /* Yumemi_WeatherUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CDF185A92665E9730075F1C1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CDF1858A2665E9710075F1C1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CDF185912665E9720075F1C1;
+			remoteInfo = "Yumemi-Weather";
+		};
+		CDF185B42665E9740075F1C1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CDF1858A2665E9710075F1C1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CDF185912665E9720075F1C1;
+			remoteInfo = "Yumemi-Weather";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		CDF185922665E9720075F1C1 /* Yumemi-Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Yumemi-Weather.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CDF185952665E9720075F1C1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		CDF185972665E9720075F1C1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		CDF185992665E9720075F1C1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		CDF1859C2665E9720075F1C1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		CDF1859E2665E9730075F1C1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CDF185A12665E9730075F1C1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		CDF185A32665E9730075F1C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CDF185A82665E9730075F1C1 /* Yumemi-WeatherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Yumemi-WeatherTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CDF185AC2665E9730075F1C1 /* Yumemi_WeatherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Yumemi_WeatherTests.swift; sourceTree = "<group>"; };
+		CDF185AE2665E9730075F1C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CDF185B32665E9740075F1C1 /* Yumemi-WeatherUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Yumemi-WeatherUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CDF185B72665E9740075F1C1 /* Yumemi_WeatherUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Yumemi_WeatherUITests.swift; sourceTree = "<group>"; };
+		CDF185B92665E9740075F1C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CDF1858F2665E9720075F1C1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CDF185A52665E9730075F1C1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CDF185B02665E9740075F1C1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CDF185892665E9710075F1C1 = {
+			isa = PBXGroup;
+			children = (
+				CDF185942665E9720075F1C1 /* Yumemi-Weather */,
+				CDF185AB2665E9730075F1C1 /* Yumemi-WeatherTests */,
+				CDF185B62665E9740075F1C1 /* Yumemi-WeatherUITests */,
+				CDF185932665E9720075F1C1 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CDF185932665E9720075F1C1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CDF185922665E9720075F1C1 /* Yumemi-Weather.app */,
+				CDF185A82665E9730075F1C1 /* Yumemi-WeatherTests.xctest */,
+				CDF185B32665E9740075F1C1 /* Yumemi-WeatherUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CDF185942665E9720075F1C1 /* Yumemi-Weather */ = {
+			isa = PBXGroup;
+			children = (
+				CDF185952665E9720075F1C1 /* AppDelegate.swift */,
+				CDF185972665E9720075F1C1 /* SceneDelegate.swift */,
+				CDF185992665E9720075F1C1 /* ViewController.swift */,
+				CDF1859B2665E9720075F1C1 /* Main.storyboard */,
+				CDF1859E2665E9730075F1C1 /* Assets.xcassets */,
+				CDF185A02665E9730075F1C1 /* LaunchScreen.storyboard */,
+				CDF185A32665E9730075F1C1 /* Info.plist */,
+			);
+			path = "Yumemi-Weather";
+			sourceTree = "<group>";
+		};
+		CDF185AB2665E9730075F1C1 /* Yumemi-WeatherTests */ = {
+			isa = PBXGroup;
+			children = (
+				CDF185AC2665E9730075F1C1 /* Yumemi_WeatherTests.swift */,
+				CDF185AE2665E9730075F1C1 /* Info.plist */,
+			);
+			path = "Yumemi-WeatherTests";
+			sourceTree = "<group>";
+		};
+		CDF185B62665E9740075F1C1 /* Yumemi-WeatherUITests */ = {
+			isa = PBXGroup;
+			children = (
+				CDF185B72665E9740075F1C1 /* Yumemi_WeatherUITests.swift */,
+				CDF185B92665E9740075F1C1 /* Info.plist */,
+			);
+			path = "Yumemi-WeatherUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CDF185912665E9720075F1C1 /* Yumemi-Weather */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CDF185BC2665E9740075F1C1 /* Build configuration list for PBXNativeTarget "Yumemi-Weather" */;
+			buildPhases = (
+				CDF1858E2665E9720075F1C1 /* Sources */,
+				CDF1858F2665E9720075F1C1 /* Frameworks */,
+				CDF185902665E9720075F1C1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Yumemi-Weather";
+			productName = "Yumemi-Weather";
+			productReference = CDF185922665E9720075F1C1 /* Yumemi-Weather.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CDF185A72665E9730075F1C1 /* Yumemi-WeatherTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CDF185BF2665E9740075F1C1 /* Build configuration list for PBXNativeTarget "Yumemi-WeatherTests" */;
+			buildPhases = (
+				CDF185A42665E9730075F1C1 /* Sources */,
+				CDF185A52665E9730075F1C1 /* Frameworks */,
+				CDF185A62665E9730075F1C1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CDF185AA2665E9730075F1C1 /* PBXTargetDependency */,
+			);
+			name = "Yumemi-WeatherTests";
+			productName = "Yumemi-WeatherTests";
+			productReference = CDF185A82665E9730075F1C1 /* Yumemi-WeatherTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		CDF185B22665E9740075F1C1 /* Yumemi-WeatherUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CDF185C22665E9740075F1C1 /* Build configuration list for PBXNativeTarget "Yumemi-WeatherUITests" */;
+			buildPhases = (
+				CDF185AF2665E9740075F1C1 /* Sources */,
+				CDF185B02665E9740075F1C1 /* Frameworks */,
+				CDF185B12665E9740075F1C1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CDF185B52665E9740075F1C1 /* PBXTargetDependency */,
+			);
+			name = "Yumemi-WeatherUITests";
+			productName = "Yumemi-WeatherUITests";
+			productReference = CDF185B32665E9740075F1C1 /* Yumemi-WeatherUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CDF1858A2665E9710075F1C1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1250;
+				LastUpgradeCheck = 1250;
+				TargetAttributes = {
+					CDF185912665E9720075F1C1 = {
+						CreatedOnToolsVersion = 12.5;
+					};
+					CDF185A72665E9730075F1C1 = {
+						CreatedOnToolsVersion = 12.5;
+						TestTargetID = CDF185912665E9720075F1C1;
+					};
+					CDF185B22665E9740075F1C1 = {
+						CreatedOnToolsVersion = 12.5;
+						TestTargetID = CDF185912665E9720075F1C1;
+					};
+				};
+			};
+			buildConfigurationList = CDF1858D2665E9710075F1C1 /* Build configuration list for PBXProject "Yumemi-Weather" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CDF185892665E9710075F1C1;
+			productRefGroup = CDF185932665E9720075F1C1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CDF185912665E9720075F1C1 /* Yumemi-Weather */,
+				CDF185A72665E9730075F1C1 /* Yumemi-WeatherTests */,
+				CDF185B22665E9740075F1C1 /* Yumemi-WeatherUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CDF185902665E9720075F1C1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CDF185A22665E9730075F1C1 /* LaunchScreen.storyboard in Resources */,
+				CDF1859F2665E9730075F1C1 /* Assets.xcassets in Resources */,
+				CDF1859D2665E9720075F1C1 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CDF185A62665E9730075F1C1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CDF185B12665E9740075F1C1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CDF1858E2665E9720075F1C1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CDF1859A2665E9720075F1C1 /* ViewController.swift in Sources */,
+				CDF185962665E9720075F1C1 /* AppDelegate.swift in Sources */,
+				CDF185982665E9720075F1C1 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CDF185A42665E9730075F1C1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CDF185AD2665E9730075F1C1 /* Yumemi_WeatherTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CDF185AF2665E9740075F1C1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CDF185B82665E9740075F1C1 /* Yumemi_WeatherUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CDF185AA2665E9730075F1C1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CDF185912665E9720075F1C1 /* Yumemi-Weather */;
+			targetProxy = CDF185A92665E9730075F1C1 /* PBXContainerItemProxy */;
+		};
+		CDF185B52665E9740075F1C1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CDF185912665E9720075F1C1 /* Yumemi-Weather */;
+			targetProxy = CDF185B42665E9740075F1C1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		CDF1859B2665E9720075F1C1 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CDF1859C2665E9720075F1C1 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		CDF185A02665E9730075F1C1 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CDF185A12665E9730075F1C1 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CDF185BA2665E9740075F1C1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		CDF185BB2665E9740075F1C1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CDF185BD2665E9740075F1C1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 45BK4R2U44;
+				INFOPLIST_FILE = "Yumemi-Weather/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Sklab.Yumemi-Weather";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CDF185BE2665E9740075F1C1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 45BK4R2U44;
+				INFOPLIST_FILE = "Yumemi-Weather/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Sklab.Yumemi-Weather";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		CDF185C02665E9740075F1C1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 45BK4R2U44;
+				INFOPLIST_FILE = "Yumemi-WeatherTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Sklab.Yumemi-WeatherTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Yumemi-Weather.app/Yumemi-Weather";
+			};
+			name = Debug;
+		};
+		CDF185C12665E9740075F1C1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 45BK4R2U44;
+				INFOPLIST_FILE = "Yumemi-WeatherTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Sklab.Yumemi-WeatherTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Yumemi-Weather.app/Yumemi-Weather";
+			};
+			name = Release;
+		};
+		CDF185C32665E9740075F1C1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 45BK4R2U44;
+				INFOPLIST_FILE = "Yumemi-WeatherUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Sklab.Yumemi-WeatherUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Yumemi-Weather";
+			};
+			name = Debug;
+		};
+		CDF185C42665E9740075F1C1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 45BK4R2U44;
+				INFOPLIST_FILE = "Yumemi-WeatherUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Sklab.Yumemi-WeatherUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Yumemi-Weather";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CDF1858D2665E9710075F1C1 /* Build configuration list for PBXProject "Yumemi-Weather" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CDF185BA2665E9740075F1C1 /* Debug */,
+				CDF185BB2665E9740075F1C1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CDF185BC2665E9740075F1C1 /* Build configuration list for PBXNativeTarget "Yumemi-Weather" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CDF185BD2665E9740075F1C1 /* Debug */,
+				CDF185BE2665E9740075F1C1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CDF185BF2665E9740075F1C1 /* Build configuration list for PBXNativeTarget "Yumemi-WeatherTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CDF185C02665E9740075F1C1 /* Debug */,
+				CDF185C12665E9740075F1C1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CDF185C22665E9740075F1C1 /* Build configuration list for PBXNativeTarget "Yumemi-WeatherUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CDF185C32665E9740075F1C1 /* Debug */,
+				CDF185C42665E9740075F1C1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CDF1858A2665E9710075F1C1 /* Project object */;
+}
