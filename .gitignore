@@ -57,6 +57,9 @@ DerivedData/
 ### 「File > Workspace Settings」で設定できるワークスペースの設定値。
 **/xcshareddata/WorkspaceSettings.xcsettings
 
+### R.swift
+*.generated.swift
+
 ## Gcc Patch
 ### コードカバレッジの計測を有効化（GCC_GENERATE_TEST_COVERAGE_FILES = YES）していると生成される。
 ### 他のケースでも生成されるかもしれないが分からなかった
