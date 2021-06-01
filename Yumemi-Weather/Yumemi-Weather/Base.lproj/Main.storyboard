@@ -48,13 +48,7 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="E0D-xf-iJl" firstAttribute="width" secondItem="EKP-SR-QmB" secondAttribute="width" multiplier="0.5" id="A2F-1l-HDM"/>
-                                    <constraint firstItem="3uk-Oi-aAN" firstAttribute="leading" secondItem="D33-ee-SZO" secondAttribute="leading" id="AYP-j0-75d"/>
-                                    <constraint firstAttribute="trailing" secondItem="3uk-Oi-aAN" secondAttribute="trailing" id="Ci0-Pt-k2F"/>
-                                    <constraint firstItem="EKP-SR-QmB" firstAttribute="leading" secondItem="D33-ee-SZO" secondAttribute="leading" id="EP4-4D-SHd"/>
-                                    <constraint firstAttribute="bottom" secondItem="3uk-Oi-aAN" secondAttribute="bottom" id="bi6-Kl-76z"/>
                                     <constraint firstItem="zKb-wx-4R7" firstAttribute="width" secondItem="EKP-SR-QmB" secondAttribute="width" multiplier="0.5" id="eVS-no-Ha3"/>
-                                    <constraint firstItem="EKP-SR-QmB" firstAttribute="top" secondItem="D33-ee-SZO" secondAttribute="top" id="rSW-oH-ccG"/>
-                                    <constraint firstAttribute="trailing" secondItem="EKP-SR-QmB" secondAttribute="trailing" id="w8x-eU-9Q5"/>
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1se-fi-sQi">
