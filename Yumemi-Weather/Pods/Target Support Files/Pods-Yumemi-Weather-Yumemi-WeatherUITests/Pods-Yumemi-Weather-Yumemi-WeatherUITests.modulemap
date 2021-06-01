@@ -1,0 +1,6 @@
+framework module Pods_Yumemi_Weather_Yumemi_WeatherUITests {
+  umbrella header "Pods-Yumemi-Weather-Yumemi-WeatherUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
