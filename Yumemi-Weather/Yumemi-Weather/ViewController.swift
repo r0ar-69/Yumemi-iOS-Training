@@ -16,5 +16,3 @@ class ViewController: UIViewController {
 
 
 }
-
-//gitignore_globalのテスト
