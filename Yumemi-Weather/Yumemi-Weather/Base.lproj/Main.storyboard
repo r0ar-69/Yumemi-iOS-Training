@@ -12,7 +12,7 @@
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Yumemi_Weather" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="WeatherView" customModule="Yumemi_Weather" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -64,11 +64,17 @@
                                         <rect key="frame" x="0.0" y="0.0" width="103.5" height="30"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="15"/>
                                         <state key="normal" title="Close"/>
+                                        <connections>
+                                            <action selector="closeButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XwB-Uo-YhM"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WC5-Pl-wDo">
                                         <rect key="frame" x="103.5" y="0.0" width="103.5" height="30"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="15"/>
                                         <state key="normal" title="Reload"/>
+                                        <connections>
+                                            <action selector="reloadButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="A7T-E0-ixe"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -84,7 +90,13 @@
                             <constraint firstItem="1se-fi-sQi" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Yy1-Xt-nob"/>
                             <constraint firstItem="D33-ee-SZO" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="evm-IQ-GAK"/>
                         </constraints>
+                        <connections>
+                            <outlet property="weatherImageView" destination="EKP-SR-QmB" id="auK-CZ-OAm"/>
+                        </connections>
                     </view>
+                    <connections>
+                        <outlet property="weatherView" destination="8bC-Xf-vdC" id="YoS-Tu-hXc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
