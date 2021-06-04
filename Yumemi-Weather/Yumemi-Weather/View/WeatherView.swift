@@ -13,7 +13,7 @@ class WeatherView: UIView {
     
     @IBOutlet weak var weatherImageView: UIImageView!
     
-    public func set(weather: String){
+    public func set(weather: String) {
         switch weather {
         case "sunny":
             weatherImageView.image = R.image.sunny()

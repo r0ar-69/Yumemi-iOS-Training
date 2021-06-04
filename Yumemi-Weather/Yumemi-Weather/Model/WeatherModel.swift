@@ -9,19 +9,17 @@ import Foundation
 import YumemiWeather
 
 class WeatherModel {
-    static let notificationName = "WeatherModelChanged"
     let notificationCenter = NotificationCenter()
     
-    var weather: String = "" {
-        didSet {
-            notificationCenter.post(
-                name: .init(rawValue: WeatherModel.notificationName),
-                object: weather
-            )
-        }
-    }
-    
     func fetchWeather() {
-        weather = YumemiWeather.fetchWeather()
+        let weather = YumemiWeather.fetchWeather()
+        notificationCenter.post(
+            name: .weatherModelChanged,
+            object: weather
+        )
     }
+}
+
+extension Notification.Name {
+    static let weatherModelChanged = Notification.Name("WeatherModelChanged")
 }

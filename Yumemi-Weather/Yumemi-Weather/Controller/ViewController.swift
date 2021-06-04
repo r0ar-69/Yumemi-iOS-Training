@@ -24,7 +24,7 @@ class ViewController: UIViewController {
         weatherModel.notificationCenter.addObserver(
             self,
             selector: #selector(self.handleWeatherChange(_:)),
-            name: .init(NSNotification.Name(rawValue: WeatherModel.notificationName)),
+            name: .weatherModelChanged,
             object: nil
         )
     }
