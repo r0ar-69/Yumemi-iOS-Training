@@ -687,7 +687,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1D969878AE96E01AF165DB69 /* Pods-Yumemi-WeatherTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 45BK4R2U44;
@@ -710,7 +710,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E4AED6D6B5DC4E3F76E4320B /* Pods-Yumemi-WeatherTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 45BK4R2U44;
@@ -733,7 +733,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6A60754269231A0F4521F683 /* Pods-Yumemi-Weather-Yumemi-WeatherUITests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 45BK4R2U44;
 				INFOPLIST_FILE = "Yumemi-WeatherUITests/Info.plist";
@@ -754,7 +754,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 172F4D023F06ABC2A637E86C /* Pods-Yumemi-Weather-Yumemi-WeatherUITests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 45BK4R2U44;
 				INFOPLIST_FILE = "Yumemi-WeatherUITests/Info.plist";
