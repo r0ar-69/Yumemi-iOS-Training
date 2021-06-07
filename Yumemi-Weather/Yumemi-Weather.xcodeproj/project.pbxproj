@@ -11,6 +11,8 @@
 		7D6E4472A301DDCE10943018 /* Pods_Yumemi_Weather.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0CF3F4C60ADD5AE1F9C4811 /* Pods_Yumemi_Weather.framework */; };
 		CD010BAA26677D4F00821658 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD010BA926677D4F00821658 /* SceneDelegate.swift */; };
 		CD1C7025266616F800BBF45F /* YumemiWeather in Frameworks */ = {isa = PBXBuildFile; productRef = CD1C7024266616F800BBF45F /* YumemiWeather */; };
+		CD228F75266DF69F00DFA375 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD228F74266DF69F00DFA375 /* Response.swift */; };
+		CD228F77266E048800DFA375 /* ResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD228F76266E048800DFA375 /* ResponseError.swift */; };
 		CDF185962665E9720075F1C1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF185952665E9720075F1C1 /* AppDelegate.swift */; };
 		CDF1859D2665E9720075F1C1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDF1859B2665E9720075F1C1 /* Main.storyboard */; };
 		CDF1859F2665E9730075F1C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDF1859E2665E9730075F1C1 /* Assets.xcassets */; };
@@ -50,6 +52,8 @@
 		6A60754269231A0F4521F683 /* Pods-Yumemi-Weather-Yumemi-WeatherUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yumemi-Weather-Yumemi-WeatherUITests.debug.xcconfig"; path = "Target Support Files/Pods-Yumemi-Weather-Yumemi-WeatherUITests/Pods-Yumemi-Weather-Yumemi-WeatherUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		7F98FF68198D69A307E57221 /* Pods_Yumemi_WeatherTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Yumemi_WeatherTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD010BA926677D4F00821658 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		CD228F74266DF69F00DFA375 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
+		CD228F76266E048800DFA375 /* ResponseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseError.swift; sourceTree = "<group>"; };
 		CDF185922665E9720075F1C1 /* Yumemi-Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Yumemi-Weather.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDF185952665E9720075F1C1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDF1859C2665E9720075F1C1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -122,6 +126,15 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		CD228F71266DF55700DFA375 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				CD228F74266DF69F00DFA375 /* Response.swift */,
+				CD228F76266E048800DFA375 /* ResponseError.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 		CDF185892665E9710075F1C1 = {
 			isa = PBXGroup;
 			children = (
@@ -148,6 +161,7 @@
 		CDF185942665E9720075F1C1 /* Yumemi-Weather */ = {
 			isa = PBXGroup;
 			children = (
+				CD228F71266DF55700DFA375 /* Data */,
 				CDF998FE2667842D009A1B63 /* Controller */,
 				CDF998FB26678403009A1B63 /* View */,
 				CDF998F8266783C8009A1B63 /* Model */,
@@ -467,12 +481,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD228F77266E048800DFA375 /* ResponseError.swift in Sources */,
 				CDF185962665E9720075F1C1 /* AppDelegate.swift in Sources */,
 				CD010BAA26677D4F00821658 /* SceneDelegate.swift in Sources */,
 				CDF998F1266780B5009A1B63 /* ViewController.swift in Sources */,
 				CDF998FA266783EA009A1B63 /* WeatherModel.swift in Sources */,
 				CDF998F726678333009A1B63 /* R.generated.swift in Sources */,
 				CDF998FD26678414009A1B63 /* WeatherView.swift in Sources */,
+				CD228F75266DF69F00DFA375 /* Response.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
