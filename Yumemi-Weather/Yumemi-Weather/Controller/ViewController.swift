@@ -27,11 +27,23 @@ class ViewController: UIViewController {
             name: .weatherModelChanged,
             object: nil
         )
+        weatherModel.notificationCenter.addObserver(
+            self,
+            selector: #selector(self.handleErrorOccurred(_:)),
+            name: .errorOccurred,
+            object: nil
+        )
     }
-
+    
     @objc func handleWeatherChange(_ notification: Notification) {
         if let weather = notification.object as? String {
             weatherView.set(weather: weather)
+        }
+    }
+    
+    @objc func handleErrorOccurred(_ notification: Notification) {
+        if let error = notification.object as? String {
+            present(weatherView.setAlertWith(error: error), animated: true, completion: nil)
         }
     }
 

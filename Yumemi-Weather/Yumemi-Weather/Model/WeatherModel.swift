@@ -12,14 +12,30 @@ class WeatherModel {
     let notificationCenter = NotificationCenter()
     
     func fetchWeather() {
-        let weather = YumemiWeather.fetchWeather()
-        notificationCenter.post(
-            name: .weatherModelChanged,
-            object: weather
-        )
+        do {
+            let weather = try YumemiWeather.fetchWeather(at: "tokyo")
+            
+            notificationCenter.post(
+                name: .weatherModelChanged,
+                object: weather
+            )
+        } catch YumemiWeatherError.invalidParameterError {
+            notificationCenter.post(
+                name: .errorOccurred,
+                object: "Invalid Parameter"
+            )
+        } catch YumemiWeatherError.unknownError {
+            notificationCenter.post(
+                name: .errorOccurred,
+                object: "Unknown"
+            )
+        } catch {
+            
+        }
     }
 }
 
 extension Notification.Name {
     static let weatherModelChanged = Notification.Name("WeatherModelChanged")
+    static let errorOccurred = Notification.Name("ErrorOccurred")
 }
