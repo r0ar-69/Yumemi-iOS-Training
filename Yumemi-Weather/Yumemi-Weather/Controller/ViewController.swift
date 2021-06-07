@@ -52,8 +52,7 @@ class ViewController: UIViewController {
             let defaultAction: UIAlertAction = UIAlertAction(
                 title: "Close",
                 style: .default,
-                handler:{(action:UIAlertAction!) -> Void in
-                }
+                handler: nil
             )
             
             alertController.addAction(defaultAction)
