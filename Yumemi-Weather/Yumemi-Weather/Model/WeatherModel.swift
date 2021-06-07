@@ -19,18 +19,24 @@ class WeatherModel {
                 name: .weatherModelChanged,
                 object: weather
             )
-        } catch YumemiWeatherError.invalidParameterError {
-            notificationCenter.post(
-                name: .errorOccurred,
-                object: "Invalid Parameter"
-            )
-        } catch YumemiWeatherError.unknownError {
-            notificationCenter.post(
-                name: .errorOccurred,
-                object: "Unknown"
-            )
         } catch {
-            
+            switch error {
+            case YumemiWeatherError.invalidParameterError:
+                notificationCenter.post(
+                    name: .errorOccurred,
+                    object: "Yumemi Weather Error\n'Invalid Parameter'"
+                )
+            case YumemiWeatherError.unknownError:
+                notificationCenter.post(
+                    name: .errorOccurred,
+                    object: "Yumemi Weather Error\n'Unknown'"
+                )
+            default:
+                notificationCenter.post(
+                    name: .errorOccurred,
+                    object: "Unknown Error Occurred"
+                )
+            }
         }
     }
 }
