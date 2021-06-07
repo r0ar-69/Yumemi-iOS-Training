@@ -28,23 +28,4 @@ class WeatherView: UIView {
             break
         }
     }
-    
-    public func setAlertWith(error: String) -> UIAlertController {
-        let alertController: UIAlertController = UIAlertController(
-            title:"Error",
-            message: error,
-            preferredStyle: .alert
-        )
-        
-        let defaultAction:UIAlertAction = UIAlertAction(
-            title: "Close",
-            style: .default,
-            handler:{(action:UIAlertAction!) -> Void in
-            }
-        )
-        
-        alertController.addAction(defaultAction)
-        
-        return alertController
-    }
 }

@@ -43,8 +43,21 @@ class ViewController: UIViewController {
     
     @objc func handleErrorOccurred(_ notification: Notification) {
         if let error = notification.object as? String {
-            present(weatherView.setAlertWith(error: error), animated: true, completion: nil)
+            let alertController: UIAlertController = UIAlertController(
+                title:"Error",
+                message: error,
+                preferredStyle: .alert
+            )
+            
+            let defaultAction: UIAlertAction = UIAlertAction(
+                title: "Close",
+                style: .default,
+                handler:{(action:UIAlertAction!) -> Void in
+                }
+            )
+            
+            alertController.addAction(defaultAction)
+            present(alertController, animated: true, completion: nil)
         }
     }
-
 }
