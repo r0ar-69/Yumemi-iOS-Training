@@ -20,7 +20,7 @@ class WeatherModel {
                 }
             """)
             
-            guard let weatherData: Response = try? decode(weather: weather) else {
+            guard let weatherData: Dictionary<String, Any> = try? decode(weather: weather) else {
                 throw ResponseError.jsonDecodeError
             }
             
@@ -30,26 +30,35 @@ class WeatherModel {
             )
         } catch {
             switch error {
-            case YumemiWeatherError.invalidParameterError:
-                notificationCenter.post(
-                    name: .errorOccurred,
-                    object: "Yumemi Weather Error\n'Invalid Parameter'"
-                )
-            case YumemiWeatherError.unknownError:
-                notificationCenter.post(
-                    name: .errorOccurred,
-                    object: "Yumemi Weather Error\n'Unknown'"
-                )
-            case ResponseError.jsonDecodeError:
-                notificationCenter.post(
-                    name: .errorOccurred,
-                    object: "Response Error\n'JSON Decode'"
-                )
-            case ResponseError.unknownError:
-                notificationCenter.post(
-                    name: .errorOccurred,
-                    object: "Response Error\n'Unknown'"
-                )
+            case let error as YumemiWeatherError:
+                switch error {
+                case .invalidParameterError:
+                    notificationCenter.post(
+                        name: .errorOccurred,
+                        object: "Yumemi Weather Error\n'Invalid Parameter'"
+                    )
+                    
+                case .unknownError:
+                    notificationCenter.post(
+                        name: .errorOccurred,
+                        object: "Yumemi Weather Error\n'Unknown'"
+                    )
+                }
+                
+            case let error as ResponseError:
+                switch error {
+                case .jsonDecodeError:
+                    notificationCenter.post(
+                        name: .errorOccurred,
+                        object: "Response Error\n'JSON Decode'"
+                    )
+                case .unknownError:
+                    notificationCenter.post(
+                        name: .errorOccurred,
+                        object: "Response Error\n'Unknown'"
+                    )
+                }
+                
             default:
                 notificationCenter.post(
                     name: .errorOccurred,
@@ -59,12 +68,9 @@ class WeatherModel {
         }
     }
     
-    func decode(weather: String) throws -> Response {
-        let jsonData = weather.data(using: .utf8)
-        let jsonDecoder = JSONDecoder()
-        jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
-        
-        let response = try jsonDecoder.decode(Response.self, from: jsonData!)
+    func decode(weather: String) throws -> Dictionary<String, Any> {
+        let jsonData = weather.data(using: .utf8)!
+        let response = try JSONSerialization.jsonObject(with: jsonData) as! Dictionary<String, Any>
         
         return response
     }
