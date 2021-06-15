@@ -76,30 +76,15 @@ class WeatherModel {
         guard let jsonObject = try JSONSerialization.jsonObject(with: jsonData) as? [String: Any] else {
             throw ResponseError.jsonDecodeError
         }
-        var response = Response()
         
-        for key in Array(jsonObject.keys) {
-            switch key {
-            case "max_temp":
-                guard let maxTemp = jsonObject[key] as? Int else {
-                    throw ResponseError.jsonParseError
-                }
-                response.maxTemp = String(maxTemp)
-            case "min_temp":
-                guard let minTemp: Int = jsonObject[key] as? Int else {
-                    throw ResponseError.jsonParseError
-                }
-                response.minTemp = String(minTemp)
-            case "date":
-                response.date = jsonObject[key] as? String
-            case "weather":
-                response.weather = jsonObject[key] as? String
-            default:
-                break
-            }
+        guard let maxTemp = jsonObject["max_temp"] as? Int,
+              let minTemp = jsonObject["min_temp"] as? Int,
+              let date = jsonObject["date"] as? String,
+              let weather = jsonObject["weather"] as? String else {
+            throw ResponseError.jsonParseError
         }
         
-        return response
+        return Response(maxTemp: maxTemp, minTemp: minTemp, date: date, weather: weather)
     }
 }
 

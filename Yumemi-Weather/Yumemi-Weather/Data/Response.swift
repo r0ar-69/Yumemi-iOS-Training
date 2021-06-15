@@ -8,8 +8,8 @@
 import Foundation
 
 struct Response {
-    var maxTemp: String = ""
-    var minTemp: String? = nil
-    var date: String? = nil
-    var weather: String? = nil
+    let maxTemp: Int
+    let minTemp: Int
+    let date: String
+    let weather: String
 }
