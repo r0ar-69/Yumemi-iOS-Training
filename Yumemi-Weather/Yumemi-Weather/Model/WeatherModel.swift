@@ -20,9 +20,7 @@ class WeatherModel {
                 }
             """)
             
-            guard let weatherData: Dictionary<String, Any> = try? decode(weather: weather) else {
-                throw ResponseError.jsonDecodeError
-            }
+            let weatherData = try decode(weather: weather)
             
             notificationCenter.post(
                 name: .weatherModelChanged,
@@ -52,6 +50,11 @@ class WeatherModel {
                         name: .errorOccurred,
                         object: "Response Error\n'JSON Decode'"
                     )
+                case .jsonParseError:
+                    notificationCenter.post(
+                        name: .errorOccurred,
+                        object: "Response Error\n'JSON Pearse'"
+                    )
                 case .unknownError:
                     notificationCenter.post(
                         name: .errorOccurred,
@@ -68,9 +71,33 @@ class WeatherModel {
         }
     }
     
-    func decode(weather: String) throws -> Dictionary<String, Any> {
+    func decode(weather: String) throws -> Response {
         let jsonData = weather.data(using: .utf8)!
-        let response = try JSONSerialization.jsonObject(with: jsonData) as! Dictionary<String, Any>
+        guard let jsonObject = try JSONSerialization.jsonObject(with: jsonData) as? [String: Any] else {
+            throw ResponseError.jsonDecodeError
+        }
+        var response = Response()
+        
+        for key in Array(jsonObject.keys) {
+            switch key {
+            case "max_temp":
+                guard let maxTemp = jsonObject[key] as? Int else {
+                    throw ResponseError.jsonParseError
+                }
+                response.maxTemp = String(maxTemp)
+            case "min_temp":
+                guard let minTemp: Int = jsonObject[key] as? Int else {
+                    throw ResponseError.jsonParseError
+                }
+                response.minTemp = String(minTemp)
+            case "date":
+                response.date = jsonObject[key] as? String
+            case "weather":
+                response.weather = jsonObject[key] as? String
+            default:
+                break
+            }
+        }
         
         return response
     }

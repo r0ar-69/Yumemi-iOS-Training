@@ -15,8 +15,8 @@ class WeatherView: UIView {
     @IBOutlet weak var minTempLabel: UILabel!
     @IBOutlet weak var maxTempLabel: UILabel!
     
-    public func set(weather: Dictionary<String, Any>) {
-        switch weather["weather"] as! String {
+    public func set(weather: Response) {
+        switch weather.weather{
         case "sunny":
             weatherImageView.image = R.image.sunny()
             weatherImageView.tintColor = R.color.sun()
@@ -30,10 +30,7 @@ class WeatherView: UIView {
             break
         }
         
-        let minTemp: Int = weather["min_temp"] as! Int
-        let maxTemp: Int = weather["max_temp"] as! Int
-        
-        minTempLabel.text = String(minTemp)
-        maxTempLabel.text = String(maxTemp)
+        minTempLabel.text = weather.minTemp
+        maxTempLabel.text = weather.maxTemp
     }
 }

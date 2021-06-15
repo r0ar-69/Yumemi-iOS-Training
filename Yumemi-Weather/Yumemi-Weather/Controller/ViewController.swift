@@ -36,7 +36,7 @@ class ViewController: UIViewController {
     }
     
     @objc func handleWeatherChange(_ notification: Notification) {
-        if let weather = notification.object as? Dictionary<String, Any> {
+        if let weather = notification.object as? Response {
             weatherView.set(weather: weather)
         }
     }
