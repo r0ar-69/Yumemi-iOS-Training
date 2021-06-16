@@ -12,9 +12,11 @@ import Rswift
 class WeatherView: UIView {
     
     @IBOutlet weak var weatherImageView: UIImageView!
+    @IBOutlet weak var minTempLabel: UILabel!
+    @IBOutlet weak var maxTempLabel: UILabel!
     
-    public func set(weather: String) {
-        switch weather {
+    public func set(response: Response) {
+        switch response.weather{
         case "sunny":
             weatherImageView.image = R.image.sunny()
             weatherImageView.tintColor = R.color.sun()
@@ -27,5 +29,8 @@ class WeatherView: UIView {
         default:
             break
         }
+        
+        minTempLabel.text = String(response.minTemp)
+        maxTempLabel.text = String(response.maxTemp)
     }
 }
