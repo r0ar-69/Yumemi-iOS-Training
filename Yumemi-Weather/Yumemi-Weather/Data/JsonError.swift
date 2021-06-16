@@ -10,4 +10,5 @@ import Foundation
 enum JsonError: Error {
     case decodeError
     case encodeError
+    case convertError
 }

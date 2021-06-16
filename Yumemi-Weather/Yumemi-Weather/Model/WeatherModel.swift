@@ -21,8 +21,8 @@ class WeatherModel {
     
     func fetchWeather() {
         do {
-            let jsonString = try requestFrom(area: "tokyo", date: date)
-            let weather = try YumemiWeather.fetchWeather(jsonString)
+            let request = try requestFrom(area: "tokyo", date: date)
+            let weather = try YumemiWeather.fetchWeather(request)
             let weatherData = try decode(weather: weather)
             
             notificationCenter.post(
@@ -58,6 +58,12 @@ class WeatherModel {
                         name: .errorOccurred,
                         object: "Json Error\n'Encode'"
                     )
+                case .convertError:
+                    notificationCenter.post(
+                        name: .errorOccurred,
+                        object: "Json Error\n'Convert'"
+                    )
+
                 }
                 
             default:
@@ -69,7 +75,7 @@ class WeatherModel {
         }
     }
     
-    func requestFrom(area: String, date: String) throws -> String {
+    private func requestFrom(area: String, date: String) throws -> String {
         let encoder = JSONEncoder()
         let request = Request(area: area, date: date)
         guard let encodedDate = try? encoder.encode(request) else {
@@ -82,9 +88,9 @@ class WeatherModel {
         return jsonString
     }
     
-    func decode(weather: String) throws -> Response {
+    private func decode(weather: String) throws -> Response {
         guard let jsonData: Data = weather.data(using: .utf8) else {
-            throw JsonError.decodeError
+            throw JsonError.convertError
         }
         let jsonDecoder = JSONDecoder()
         jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
