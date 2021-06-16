@@ -21,7 +21,7 @@ class WeatherModel {
     
     func fetchWeather() {
         do {
-            let jsonString = try jsonStringFrom(area: "tokyo", date: date)
+            let jsonString = try requestFrom(area: "tokyo", date: date)
             let weather = try YumemiWeather.fetchWeather(jsonString)
             let weatherData = try decode(weather: weather)
             
@@ -58,11 +58,6 @@ class WeatherModel {
                         name: .errorOccurred,
                         object: "Json Error\n'Encode'"
                     )
-                case .unknownError:
-                    notificationCenter.post(
-                        name: .errorOccurred,
-                        object: "Json Error\n'Unknown'"
-                    )
                 }
                 
             default:
@@ -74,7 +69,7 @@ class WeatherModel {
         }
     }
     
-    func jsonStringFrom(area: String, date: String) throws -> String {
+    func requestFrom(area: String, date: String) throws -> String {
         let encoder = JSONEncoder()
         let request = Request(area: area, date: date)
         guard let encodedDate = try? encoder.encode(request) else {
@@ -88,11 +83,13 @@ class WeatherModel {
     }
     
     func decode(weather: String) throws -> Response {
-        let jsonData = weather.data(using: .utf8)
+        guard let jsonData: Data = weather.data(using: .utf8) else {
+            throw JsonError.decodeError
+        }
         let jsonDecoder = JSONDecoder()
         jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
         
-        guard let response = try? jsonDecoder.decode(Response.self, from: jsonData!) else {
+        guard let response = try? jsonDecoder.decode(Response.self, from: jsonData) else {
             throw JsonError.decodeError
         }
         
