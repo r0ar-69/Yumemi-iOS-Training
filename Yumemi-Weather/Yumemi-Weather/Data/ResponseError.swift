@@ -9,6 +9,6 @@ import Foundation
 
 enum ResponseError: Error {
     case jsonDecodeError
-    case jsonParseError
+    case jsonEncodeError
     case unknownError
 }
