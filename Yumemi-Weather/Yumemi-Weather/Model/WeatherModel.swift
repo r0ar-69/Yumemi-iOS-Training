@@ -13,6 +13,7 @@ class WeatherModel {
     private let date: String = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         let dateString = dateFormatter.string(from: Date())
         
         return dateString
@@ -20,7 +21,7 @@ class WeatherModel {
     
     func fetchWeather() {
         do {
-            let jsonString = try jsonString(in: "tokyo", at: date)
+            let jsonString = try jsonStringFrom(area: "tokyo", date: date)
             let weather = try YumemiWeather.fetchWeather(jsonString)
             let weatherData = try decode(weather: weather)
             
@@ -45,22 +46,22 @@ class WeatherModel {
                     )
                 }
                 
-            case let error as ResponseError:
+            case let error as JsonError:
                 switch error {
-                case .jsonDecodeError:
+                case .decodeError:
                     notificationCenter.post(
                         name: .errorOccurred,
-                        object: "Response Error\n'JSON Decode'"
+                        object: "Json Error\n'Decode'"
                     )
-                case .jsonEncodeError:
+                case .encodeError:
                     notificationCenter.post(
                         name: .errorOccurred,
-                        object: "Response Error\n'JSON Encode'"
+                        object: "Json Error\n'Encode'"
                     )
                 case .unknownError:
                     notificationCenter.post(
                         name: .errorOccurred,
-                        object: "Response Error\n'Unknown'"
+                        object: "Json Error\n'Unknown'"
                     )
                 }
                 
@@ -73,14 +74,14 @@ class WeatherModel {
         }
     }
     
-    func jsonString(in area: String,at date: String) throws -> String {
+    func jsonStringFrom(area: String, date: String) throws -> String {
         let encoder = JSONEncoder()
         let request = Request(area: area, date: date)
         guard let encodedDate = try? encoder.encode(request) else {
-            throw ResponseError.jsonEncodeError
+            throw JsonError.encodeError
         }
         guard let jsonString = String(data: encodedDate, encoding: .utf8) else {
-            throw ResponseError.jsonEncodeError
+            throw JsonError.encodeError
         }
         
         return jsonString
@@ -92,7 +93,7 @@ class WeatherModel {
         jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
         
         guard let response = try? jsonDecoder.decode(Response.self, from: jsonData!) else {
-            throw ResponseError.jsonDecodeError
+            throw JsonError.decodeError
         }
         
         return response
