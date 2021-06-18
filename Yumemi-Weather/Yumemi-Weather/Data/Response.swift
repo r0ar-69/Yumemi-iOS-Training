@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Response {
+struct Response: Decodable {
     let maxTemp: Int
     let minTemp: Int
     let date: String

@@ -10,17 +10,20 @@ import YumemiWeather
 
 class WeatherModel {
     let notificationCenter = NotificationCenter()
+    private let date: String = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        let dateString = dateFormatter.string(from: Date())
+        
+        return dateString
+    }()
     
     func fetchWeather() {
         do {
-            let weather = try YumemiWeather.fetchWeather("""
-                {
-                    "area" : "tokyo",
-                    "date" : "2020-04-01T12:00:00+09:00"
-                }
-            """)
-            
-            let weatherData = try decode(weather: weather)
+            let request = try request(from: Request(area: "tokyo", date: date))
+            let weather = try YumemiWeather.fetchWeather(request)
+            let weatherData: Response = try decode(from: weather)
             
             notificationCenter.post(
                 name: .weatherModelChanged,
@@ -43,23 +46,24 @@ class WeatherModel {
                     )
                 }
                 
-            case let error as ResponseError:
+            case let error as JsonError:
                 switch error {
-                case .jsonDecodeError:
+                case .decodeError:
                     notificationCenter.post(
                         name: .errorOccurred,
-                        object: "Response Error\n'JSON Decode'"
+                        object: "Json Error\n'Decode'"
                     )
-                case .jsonParseError:
+                case .encodeError:
                     notificationCenter.post(
                         name: .errorOccurred,
-                        object: "Response Error\n'JSON Pearse'"
+                        object: "Json Error\n'Encode'"
                     )
-                case .unknownError:
+                case .convertError:
                     notificationCenter.post(
                         name: .errorOccurred,
-                        object: "Response Error\n'Unknown'"
+                        object: "Json Error\n'Convert'"
                     )
+
                 }
                 
             default:
@@ -71,20 +75,28 @@ class WeatherModel {
         }
     }
     
-    func decode(weather: String) throws -> Response {
-        let jsonData = weather.data(using: .utf8)!
-        guard let jsonObject = try JSONSerialization.jsonObject(with: jsonData) as? [String: Any] else {
-            throw ResponseError.jsonDecodeError
+    private func request<T: Encodable>(from value: T) throws -> String {
+        let encoder = JSONEncoder()
+        guard let encodedDate = try? encoder.encode(value),
+              let jsonString = String(data: encodedDate, encoding: .utf8) else {
+            throw JsonError.encodeError
         }
         
-        guard let maxTemp = jsonObject["max_temp"] as? Int,
-              let minTemp = jsonObject["min_temp"] as? Int,
-              let date = jsonObject["date"] as? String,
-              let weather = jsonObject["weather"] as? String else {
-            throw ResponseError.jsonParseError
+        return jsonString
+    }
+    
+    private func decode<T: Decodable>(from value: String) throws -> T {
+        guard let jsonData: Data = value.data(using: .utf8) else {
+            throw JsonError.convertError
+        }
+        let jsonDecoder = JSONDecoder()
+        jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
+        
+        guard let response = try? jsonDecoder.decode(T.self, from: jsonData) else {
+            throw JsonError.decodeError
         }
         
-        return Response(maxTemp: maxTemp, minTemp: minTemp, date: date, weather: weather)
+        return response
     }
 }
 

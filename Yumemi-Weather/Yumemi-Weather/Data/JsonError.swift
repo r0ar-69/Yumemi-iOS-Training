@@ -7,8 +7,8 @@
 
 import Foundation
 
-enum ResponseError: Error {
-    case jsonDecodeError
-    case jsonParseError
-    case unknownError
+enum JsonError: Error {
+    case decodeError
+    case encodeError
+    case convertError
 }

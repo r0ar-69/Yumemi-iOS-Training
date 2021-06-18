@@ -16,7 +16,7 @@ class WeatherView: UIView {
     @IBOutlet weak var maxTempLabel: UILabel!
     
     public func set(response: Response) {
-        switch response.weather{
+        switch response.weather {
         case "sunny":
             weatherImageView.image = R.image.sunny()
             weatherImageView.tintColor = R.color.sun()
