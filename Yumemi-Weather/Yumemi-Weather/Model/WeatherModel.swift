@@ -21,9 +21,9 @@ class WeatherModel {
     
     func fetchWeather() {
         do {
-            let request = try requestFrom(area: "tokyo", date: date)
+            let request = try request(from: Request(area: "tokyo", date: date))
             let weather = try YumemiWeather.fetchWeather(request)
-            let weatherData = try decode(weather: weather)
+            let weatherData: Response = try decode(from: weather)
             
             notificationCenter.post(
                 name: .weatherModelChanged,
@@ -75,27 +75,24 @@ class WeatherModel {
         }
     }
     
-    private func requestFrom(area: String, date: String) throws -> String {
+    private func request<T: Encodable>(from value: T) throws -> String {
         let encoder = JSONEncoder()
-        let request = Request(area: area, date: date)
-        guard let encodedDate = try? encoder.encode(request) else {
-            throw JsonError.encodeError
-        }
-        guard let jsonString = String(data: encodedDate, encoding: .utf8) else {
+        guard let encodedDate = try? encoder.encode(value),
+              let jsonString = String(data: encodedDate, encoding: .utf8) else {
             throw JsonError.encodeError
         }
         
         return jsonString
     }
     
-    private func decode(weather: String) throws -> Response {
-        guard let jsonData: Data = weather.data(using: .utf8) else {
+    private func decode<T: Decodable>(from value: String) throws -> T {
+        guard let jsonData: Data = value.data(using: .utf8) else {
             throw JsonError.convertError
         }
         let jsonDecoder = JSONDecoder()
         jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
         
-        guard let response = try? jsonDecoder.decode(Response.self, from: jsonData) else {
+        guard let response = try? jsonDecoder.decode(T.self, from: jsonData) else {
             throw JsonError.decodeError
         }
         
