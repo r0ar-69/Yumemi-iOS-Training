@@ -7,14 +7,8 @@
 
 import UIKit
 
-class NewViewController: UIViewController {
+final class NewViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         performSegue(withIdentifier: R.segue.newViewController.toMainViewController.identifier, sender: nil)
