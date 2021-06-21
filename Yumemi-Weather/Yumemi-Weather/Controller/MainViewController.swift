@@ -23,6 +23,12 @@ final class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.viewWillEnterForeground(_:)),
+            name: UIApplication.willEnterForegroundNotification,
+            object: nil
+        )
         weatherModel.notificationCenter.addObserver(
             self,
             selector: #selector(self.handleWeatherChange(_:)),
@@ -35,6 +41,10 @@ final class MainViewController: UIViewController {
             name: .errorOccurred,
             object: nil
         )
+    }
+    
+    @objc func viewWillEnterForeground(_ notification: Notification) {
+        weatherModel.fetchWeather()
     }
     
     @objc func handleWeatherChange(_ notification: Notification) {
