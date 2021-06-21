@@ -7,13 +7,15 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class MainViewController: UIViewController {
     
     @IBOutlet var weatherView: WeatherView!
     private var weatherModel = WeatherModel()
     
     @IBAction func closeButton(_ sender: Any) {
+        dismiss(animated: true)
     }
+    
     @IBAction func reloadButton(_ sender: Any) {
         weatherModel.fetchWeather()
     }
