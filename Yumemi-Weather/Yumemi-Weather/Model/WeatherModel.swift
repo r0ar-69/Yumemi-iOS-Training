@@ -75,7 +75,7 @@ class WeatherModel {
         }
     }
     
-    private func request<T: Encodable>(from value: T) throws -> String {
+    func request<T: Encodable>(from value: T) throws -> String {
         let encoder = JSONEncoder()
         guard let encodedDate = try? encoder.encode(value),
               let jsonString = String(data: encodedDate, encoding: .utf8) else {
@@ -85,7 +85,7 @@ class WeatherModel {
         return jsonString
     }
     
-    private func decode<T: Decodable>(from value: String) throws -> T {
+    func decode<T: Decodable>(from value: String) throws -> T {
         guard let jsonData: Data = value.data(using: .utf8) else {
             throw JsonError.convertError
         }
