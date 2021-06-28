@@ -8,8 +8,7 @@
 import Foundation
 import YumemiWeather
 
-class WeatherModel {
-    let notificationCenter = NotificationCenter()
+final class WeatherModelImpl: WeatherModel {
     private let date: String = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
@@ -19,59 +18,15 @@ class WeatherModel {
         return dateString
     }()
     
-    func fetchWeather() {
+    func fetchWeather(completion: @escaping (Result<Response, Error>) -> Void) {
         do {
             let request = try request(from: Request(area: "tokyo", date: date))
             let weather = try YumemiWeather.fetchWeather(request)
             let weatherData: Response = try decode(from: weather)
             
-            notificationCenter.post(
-                name: .weatherModelChanged,
-                object: weatherData
-            )
+            completion(.success(weatherData))
         } catch {
-            switch error {
-            case let error as YumemiWeatherError:
-                switch error {
-                case .invalidParameterError:
-                    notificationCenter.post(
-                        name: .errorOccurred,
-                        object: "Yumemi Weather Error\n'Invalid Parameter'"
-                    )
-                    
-                case .unknownError:
-                    notificationCenter.post(
-                        name: .errorOccurred,
-                        object: "Yumemi Weather Error\n'Unknown'"
-                    )
-                }
-                
-            case let error as JsonError:
-                switch error {
-                case .decodeError:
-                    notificationCenter.post(
-                        name: .errorOccurred,
-                        object: "Json Error\n'Decode'"
-                    )
-                case .encodeError:
-                    notificationCenter.post(
-                        name: .errorOccurred,
-                        object: "Json Error\n'Encode'"
-                    )
-                case .convertError:
-                    notificationCenter.post(
-                        name: .errorOccurred,
-                        object: "Json Error\n'Convert'"
-                    )
-
-                }
-                
-            default:
-                notificationCenter.post(
-                    name: .errorOccurred,
-                    object: "Unknown Error Occurred"
-                )
-            }
+            completion(.failure(error))
         }
     }
     
@@ -98,9 +53,4 @@ class WeatherModel {
         
         return response
     }
-}
-
-extension Notification.Name {
-    static let weatherModelChanged = Notification.Name("WeatherModelChanged")
-    static let errorOccurred = Notification.Name("ErrorOccurred")
 }

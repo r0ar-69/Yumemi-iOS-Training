@@ -11,6 +11,10 @@ final class NewViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        performSegue(withIdentifier: R.segue.newViewController.toMainViewController.identifier, sender: nil)
+        
+        let viewController = R.storyboard.main.mainViewController()!
+        viewController.weatherModel = WeatherModelImpl()
+        viewController.modalPresentationStyle = .fullScreen
+        present(viewController, animated: true, completion: nil)
     }
 }
