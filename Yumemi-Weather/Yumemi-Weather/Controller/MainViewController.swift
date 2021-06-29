@@ -9,9 +9,7 @@ import UIKit
 import YumemiWeather
 
 protocol  WeatherModel {
-    func fetchWeather(completion: @escaping (Result<Response, Error>) -> Void)
-    func request<T: Encodable>(from value: T) throws -> String
-    func decode<T: Decodable>(from value: String) throws -> T
+    func fetchWeather(completion: (Result<Response, Error>) -> Void)
 }
 
 final class MainViewController: UIViewController {
@@ -59,7 +57,7 @@ final class MainViewController: UIViewController {
         var message: String
         
         switch error {
-        case let error as YumemiWeatherError:
+        case let error as WeatherError:
             switch error {
             case .invalidParameterError:
                 message = "Yumemi Weather Error\n'Invalid Parameter'"

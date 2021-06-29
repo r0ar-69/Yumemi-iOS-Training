@@ -18,7 +18,7 @@ final class WeatherModelImpl: WeatherModel {
         return dateString
     }()
     
-    func fetchWeather(completion: @escaping (Result<Response, Error>) -> Void) {
+    func fetchWeather(completion:(Result<Response, Error>) -> Void) {
         do {
             let request = try request(from: Request(area: "tokyo", date: date))
             let weather = try YumemiWeather.fetchWeather(request)
@@ -26,11 +26,20 @@ final class WeatherModelImpl: WeatherModel {
             
             completion(.success(weatherData))
         } catch {
-            completion(.failure(error))
+            switch error {
+            case YumemiWeatherError.invalidParameterError:
+                let err = WeatherError.invalidParameterError
+                completion(.failure(err))
+            case YumemiWeatherError.unknownError:
+                let err = WeatherError.unknownError
+                completion(.failure(err))
+            default:
+                completion(.failure(error))
+            }
         }
     }
     
-    func request<T: Encodable>(from value: T) throws -> String {
+    private func request<T: Encodable>(from value: T) throws -> String {
         let encoder = JSONEncoder()
         guard let encodedDate = try? encoder.encode(value),
               let jsonString = String(data: encodedDate, encoding: .utf8) else {
@@ -40,7 +49,7 @@ final class WeatherModelImpl: WeatherModel {
         return jsonString
     }
     
-    func decode<T: Decodable>(from value: String) throws -> T {
+    private func decode<T: Decodable>(from value: String) throws -> T {
         guard let jsonData: Data = value.data(using: .utf8) else {
             throw JsonError.convertError
         }
@@ -53,4 +62,9 @@ final class WeatherModelImpl: WeatherModel {
         
         return response
     }
+}
+
+public enum WeatherError: Error {
+    case invalidParameterError
+    case unknownError
 }
