@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import YumemiWeather
 
 protocol  WeatherModel {
     func fetchWeather(completion: (Result<Response, Error>) -> Void)
