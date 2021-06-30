@@ -7,10 +7,6 @@
 
 import UIKit
 
-protocol  WeatherModel {
-    func fetchWeather(completion: (Result<Response, Error>) -> Void)
-}
-
 final class MainViewController: UIViewController {
     
     @IBOutlet var weatherView: WeatherView!
@@ -20,10 +16,10 @@ final class MainViewController: UIViewController {
         dismiss(animated: true)
     }
     
-    @IBAction func reloadButton(_ sender: Any?) {
-        weatherModel.fetchWeather(){ result in
-            self.handleWeatherChange(result: result)
-        }
+    @IBAction func reloadButton(_ sender: Any) {
+        let result = weatherModel.fetchWeather()
+        
+        self.handleWeatherChange(result: result)
     }
     
     override func viewDidLoad() {
@@ -38,9 +34,9 @@ final class MainViewController: UIViewController {
     }
     
     @objc func viewWillEnterForeground(_ notification: Notification) {
-        weatherModel.fetchWeather(){ result in
-            self.handleWeatherChange(result: result)
-        }
+        let result = weatherModel.fetchWeather()
+        
+        self.handleWeatherChange(result: result)
     }
     
     func handleWeatherChange(result: Result<Response, Error>) {

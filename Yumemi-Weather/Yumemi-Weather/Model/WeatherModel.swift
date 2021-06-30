@@ -8,7 +8,16 @@
 import Foundation
 import YumemiWeather
 
-final class WeatherModelImpl: WeatherModel {
+protocol  WeatherModel: AnyObject {
+    func fetchWeather() -> (Result<Response, Error>)
+}
+
+protocol JsonParser: AnyObject {
+    func request<T: Encodable>(from value: T) throws -> String
+    func decode<T: Decodable>(from value: String) throws -> T
+}
+
+final class WeatherModelImpl: WeatherModel, JsonParser {
     private let date: String = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
@@ -18,28 +27,28 @@ final class WeatherModelImpl: WeatherModel {
         return dateString
     }()
     
-    func fetchWeather(completion:(Result<Response, Error>) -> Void) {
+    func fetchWeather() -> (Result<Response, Error>) {
         do {
             let request = try request(from: Request(area: "tokyo", date: date))
             let weather = try YumemiWeather.fetchWeather(request)
             let weatherData: Response = try decode(from: weather)
             
-            completion(.success(weatherData))
+            return .success(weatherData)
         } catch {
             switch error {
             case YumemiWeatherError.invalidParameterError:
                 let err = WeatherError.invalidParameterError
-                completion(.failure(err))
+                return .failure(err)
             case YumemiWeatherError.unknownError:
                 let err = WeatherError.unknownError
-                completion(.failure(err))
+                return .failure(err)
             default:
-                completion(.failure(error))
+                return .failure(error)
             }
         }
     }
     
-    private func request<T: Encodable>(from value: T) throws -> String {
+    func request<T>(from value: T) throws -> String where T : Encodable {
         let encoder = JSONEncoder()
         guard let encodedDate = try? encoder.encode(value),
               let jsonString = String(data: encodedDate, encoding: .utf8) else {
@@ -49,7 +58,7 @@ final class WeatherModelImpl: WeatherModel {
         return jsonString
     }
     
-    private func decode<T: Decodable>(from value: String) throws -> T {
+    func decode<T>(from value: String) throws -> T where T : Decodable {
         guard let jsonData: Data = value.data(using: .utf8) else {
             throw JsonError.convertError
         }
