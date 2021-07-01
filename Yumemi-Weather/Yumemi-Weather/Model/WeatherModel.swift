@@ -12,12 +12,9 @@ protocol  WeatherModel: AnyObject {
     func fetchWeather() -> (Result<Response, Error>)
 }
 
-protocol JsonParser: AnyObject {
-    func request<T: Encodable>(from value: T) throws -> String
-    func decode<T: Decodable>(from value: String) throws -> T
-}
-
-final class WeatherModelImpl: WeatherModel, JsonParser {
+final class WeatherModelImpl: WeatherModel {
+    let jsonParser = JsonParser()
+    
     private let date: String = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
@@ -29,9 +26,9 @@ final class WeatherModelImpl: WeatherModel, JsonParser {
     
     func fetchWeather() -> (Result<Response, Error>) {
         do {
-            let request = try request(from: Request(area: "tokyo", date: date))
+            let request = try jsonParser.request(from: Request(area: "tokyo", date: date))
             let weather = try YumemiWeather.fetchWeather(request)
-            let weatherData: Response = try decode(from: weather)
+            let weatherData: Response = try jsonParser.decode(from: weather)
             
             return .success(weatherData)
         } catch {
@@ -48,29 +45,7 @@ final class WeatherModelImpl: WeatherModel, JsonParser {
         }
     }
     
-    func request<T>(from value: T) throws -> String where T : Encodable {
-        let encoder = JSONEncoder()
-        guard let encodedDate = try? encoder.encode(value),
-              let jsonString = String(data: encodedDate, encoding: .utf8) else {
-            throw JsonError.encodeError
-        }
-        
-        return jsonString
-    }
-    
-    func decode<T>(from value: String) throws -> T where T : Decodable {
-        guard let jsonData: Data = value.data(using: .utf8) else {
-            throw JsonError.convertError
-        }
-        let jsonDecoder = JSONDecoder()
-        jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
-        
-        guard let response = try? jsonDecoder.decode(T.self, from: jsonData) else {
-            throw JsonError.decodeError
-        }
-        
-        return response
-    }
+
 }
 
 public enum WeatherError: Error {
