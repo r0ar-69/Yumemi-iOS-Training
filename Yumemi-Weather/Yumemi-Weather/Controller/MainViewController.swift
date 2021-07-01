@@ -10,7 +10,7 @@ import UIKit
 final class MainViewController: UIViewController {
     
     @IBOutlet var weatherView: WeatherView!
-    var weatherModel: WeatherModel!
+    private (set) var weatherModel = WeatherModelImpl()
     
     @IBAction func closeButton(_ sender: Any) {
         dismiss(animated: true)

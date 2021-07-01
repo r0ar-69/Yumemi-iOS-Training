@@ -48,7 +48,7 @@ final class WeatherModelImpl: WeatherModel {
 
 }
 
-public enum WeatherError: Error {
+enum WeatherError: Error {
     case invalidParameterError
     case unknownError
 }
