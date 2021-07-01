@@ -10,11 +10,7 @@ import XCTest
 
 class JsonParseTests: XCTestCase {
     
-    var jsonPerser: JsonParserMock!
-    
-    override func setUp() {
-        jsonPerser = JsonParserMock()
-    }
+    var jsonPerser: JsonParser = WeatherModelImpl()
     
     func test_Jsonのエンコード() throws {
         let expectedResult = """
