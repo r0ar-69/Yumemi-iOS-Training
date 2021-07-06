@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import Rswift
 
-class WeatherView: UIView {
+final class WeatherView: UIView {
     
     @IBOutlet weak var weatherImageView: UIImageView!
     @IBOutlet weak var minTempLabel: UILabel!

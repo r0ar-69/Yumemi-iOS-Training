@@ -15,6 +15,8 @@
 		CD228F77266E048800DFA375 /* JsonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD228F76266E048800DFA375 /* JsonError.swift */; };
 		CD6CCC88267C6A190026F85F /* NewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6CCC87267C6A190026F85F /* NewViewController.swift */; };
 		CDA7E7A826789E19000E932C /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA7E7A726789E19000E932C /* Request.swift */; };
+		CDC76942268C072F005D7414 /* JsonParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC76941268C072F005D7414 /* JsonParserTests.swift */; };
+		CDC76944268D96E4005D7414 /* JsonParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC76943268D96E4005D7414 /* JsonParser.swift */; };
 		CDF185962665E9720075F1C1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF185952665E9720075F1C1 /* AppDelegate.swift */; };
 		CDF1859D2665E9720075F1C1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDF1859B2665E9720075F1C1 /* Main.storyboard */; };
 		CDF1859F2665E9730075F1C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDF1859E2665E9730075F1C1 /* Assets.xcassets */; };
@@ -58,6 +60,8 @@
 		CD228F76266E048800DFA375 /* JsonError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonError.swift; sourceTree = "<group>"; };
 		CD6CCC87267C6A190026F85F /* NewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewViewController.swift; sourceTree = "<group>"; };
 		CDA7E7A726789E19000E932C /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		CDC76941268C072F005D7414 /* JsonParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonParserTests.swift; sourceTree = "<group>"; };
+		CDC76943268D96E4005D7414 /* JsonParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonParser.swift; sourceTree = "<group>"; };
 		CDF185922665E9720075F1C1 /* Yumemi-Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Yumemi-Weather.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDF185952665E9720075F1C1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDF1859C2665E9720075F1C1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -176,6 +180,7 @@
 				CDF1859E2665E9730075F1C1 /* Assets.xcassets */,
 				CDF185A02665E9730075F1C1 /* LaunchScreen.storyboard */,
 				CDF185A32665E9730075F1C1 /* Info.plist */,
+				CDC76943268D96E4005D7414 /* JsonParser.swift */,
 			);
 			path = "Yumemi-Weather";
 			sourceTree = "<group>";
@@ -185,6 +190,7 @@
 			children = (
 				CDF185AC2665E9730075F1C1 /* Yumemi_WeatherTests.swift */,
 				CDF185AE2665E9730075F1C1 /* Info.plist */,
+				CDC76941268C072F005D7414 /* JsonParserTests.swift */,
 			);
 			path = "Yumemi-WeatherTests";
 			sourceTree = "<group>";
@@ -496,6 +502,7 @@
 				CDF998FD26678414009A1B63 /* WeatherView.swift in Sources */,
 				CD6CCC88267C6A190026F85F /* NewViewController.swift in Sources */,
 				CDA7E7A826789E19000E932C /* Request.swift in Sources */,
+				CDC76944268D96E4005D7414 /* JsonParser.swift in Sources */,
 				CD228F75266DF69F00DFA375 /* Response.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -505,6 +512,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDF185AD2665E9730075F1C1 /* Yumemi_WeatherTests.swift in Sources */,
+				CDC76942268C072F005D7414 /* JsonParserTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
