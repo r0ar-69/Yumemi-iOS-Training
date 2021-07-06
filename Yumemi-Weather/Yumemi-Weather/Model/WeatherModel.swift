@@ -9,7 +9,7 @@ import Foundation
 import YumemiWeather
 
 protocol  WeatherModel: AnyObject {
-    func fetchWeather() -> (Result<Response, Error>)
+    func fetchWeather(completion: @escaping (Result<Response, Error>) -> Void)
 }
 
 final class WeatherModelImpl: WeatherModel {
@@ -24,28 +24,37 @@ final class WeatherModelImpl: WeatherModel {
         return dateString
     }()
     
-    func fetchWeather() -> (Result<Response, Error>) {
+    func fetchWeather(completion: @escaping (Result<Response, Error>) -> Void) {
         do {
             let request = try jsonParser.encode(from: Request(area: "tokyo", date: date))
-            let weather = try YumemiWeather.fetchWeather(request)
-            let weatherData: Response = try jsonParser.decode(from: weather)
-            
-            return .success(weatherData)
-        } catch {
-            switch error {
-            case YumemiWeatherError.invalidParameterError:
-                let err = WeatherError.invalidParameterError
-                return .failure(err)
-            case YumemiWeatherError.unknownError:
-                let err = WeatherError.unknownError
-                return .failure(err)
-            default:
-                return .failure(error)
+            DispatchQueue.global().async {
+                do {
+                    let weather = try YumemiWeather.syncFetchWeather(request)
+                    do {
+                        let weatherData: Response = try self.jsonParser.decode(from: weather)
+                            completion(.success(weatherData))
+                    } catch {
+                        completion(.failure(error))
+                    }
+                } catch {
+                    switch error {
+                    case YumemiWeatherError.invalidParameterError:
+                        let err = WeatherError.invalidParameterError
+                        completion(.failure(err))
+                    case YumemiWeatherError.unknownError:
+                        let err = WeatherError.unknownError
+                        completion(.failure(err))
+                    default:
+                        completion(.failure(error))
+                    }
+                }
             }
+        } catch {
+            completion(.failure(error))
         }
     }
     
-
+    
 }
 
 enum WeatherError: Error {

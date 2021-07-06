@@ -7,7 +7,7 @@
 
 import Foundation
 
-class JsonParser {
+final class JsonParser {
     
     func encode<T>(from value: T) throws -> String where T : Encodable {
         let encoder = JSONEncoder()

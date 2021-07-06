@@ -7,13 +7,13 @@
 
 import Foundation
 import UIKit
-import Rswift
 
 final class WeatherView: UIView {
     
     @IBOutlet weak var weatherImageView: UIImageView!
     @IBOutlet weak var minTempLabel: UILabel!
     @IBOutlet weak var maxTempLabel: UILabel!
+    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     
     public func set(response: Response) {
         switch response.weather {

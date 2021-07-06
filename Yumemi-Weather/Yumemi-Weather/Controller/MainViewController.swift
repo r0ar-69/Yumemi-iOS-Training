@@ -17,9 +17,13 @@ final class MainViewController: UIViewController {
     }
     
     @IBAction func reloadButton(_ sender: Any) {
-        let result = weatherModel.fetchWeather()
-        
-        self.handleWeatherChange(result: result)
+        weatherView.activityIndicatorView.startAnimating()
+        weatherModel.fetchWeather(){ result in
+            DispatchQueue.main.async {
+                self.weatherView.activityIndicatorView.stopAnimating()
+                self.handleWeatherChange(result: result)
+            }
+        }
     }
     
     override func viewDidLoad() {
@@ -34,9 +38,11 @@ final class MainViewController: UIViewController {
     }
     
     @objc func viewWillEnterForeground(_ notification: Notification) {
-        let result = weatherModel.fetchWeather()
-        
-        self.handleWeatherChange(result: result)
+        weatherModel.fetchWeather(){ result in
+            DispatchQueue.main.async {
+                self.handleWeatherChange(result: result)
+            }
+        }
     }
     
     func handleWeatherChange(result: Result<Response, Error>) {
