@@ -26,7 +26,7 @@ final class WeatherModelImpl: WeatherModel {
     
     func fetchWeather() -> (Result<Response, Error>) {
         do {
-            let request = try jsonParser.request(from: Request(area: "tokyo", date: date))
+            let request = try jsonParser.encode(from: Request(area: "tokyo", date: date))
             let weather = try YumemiWeather.fetchWeather(request)
             let weatherData: Response = try jsonParser.decode(from: weather)
             

@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Rswift
 
 final class NewViewController: UIViewController {
 

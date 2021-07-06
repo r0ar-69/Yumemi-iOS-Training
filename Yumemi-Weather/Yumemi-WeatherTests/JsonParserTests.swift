@@ -8,7 +8,7 @@
 import XCTest
 @testable import Yumemi_Weather
 
-class JsonParserTests: XCTestCase {
+final class JsonParserTests: XCTestCase {
     
     let jsonPerser = JsonParser()
     
@@ -16,7 +16,7 @@ class JsonParserTests: XCTestCase {
         let expectedResult = """
 {"date":"","area":""}
 """
-        let result = try jsonPerser.request(from: Request(area: "", date: ""))
+        let result = try jsonPerser.encode(from: Request(area: "", date: ""))
         
         XCTAssertEqual(result, expectedResult)
     }

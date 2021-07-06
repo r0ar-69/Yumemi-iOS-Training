@@ -9,7 +9,7 @@ import Foundation
 
 class JsonParser {
     
-    func request<T>(from value: T) throws -> String where T : Encodable {
+    func encode<T>(from value: T) throws -> String where T : Encodable {
         let encoder = JSONEncoder()
         guard let encodedDate = try? encoder.encode(value),
               let jsonString = String(data: encodedDate, encoding: .utf8) else {
