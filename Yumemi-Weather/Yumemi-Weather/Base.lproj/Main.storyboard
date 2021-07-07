@@ -71,7 +71,7 @@
                                 </subviews>
                             </stackView>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="sCU-S1-yzh">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="570" width="414" height="80"/>
                             </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -82,12 +82,12 @@
                             <constraint firstItem="WC5-Pl-wDo" firstAttribute="centerX" secondItem="zKb-wx-4R7" secondAttribute="centerX" id="FUy-VM-PZt"/>
                             <constraint firstItem="D33-ee-SZO" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="JOw-lO-dj5"/>
                             <constraint firstItem="EKP-SR-QmB" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.5" id="Ufg-e3-fCY"/>
+                            <constraint firstItem="sCU-S1-yzh" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="WJb-Ac-NBm"/>
                             <constraint firstItem="1se-fi-sQi" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Yy1-Xt-nob"/>
-                            <constraint firstItem="sCU-S1-yzh" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="aox-Af-j2z"/>
+                            <constraint firstItem="sCU-S1-yzh" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="cgm-Tq-Ekm"/>
+                            <constraint firstItem="sCU-S1-yzh" firstAttribute="top" secondItem="D33-ee-SZO" secondAttribute="bottom" id="eST-qn-w3N"/>
                             <constraint firstItem="D33-ee-SZO" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="evm-IQ-GAK"/>
-                            <constraint firstItem="sCU-S1-yzh" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="skE-iL-tFl"/>
-                            <constraint firstItem="sCU-S1-yzh" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="toi-tM-dqH"/>
-                            <constraint firstItem="sCU-S1-yzh" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="veb-en-5Bb"/>
+                            <constraint firstItem="1se-fi-sQi" firstAttribute="top" secondItem="sCU-S1-yzh" secondAttribute="bottom" id="pcd-eG-cah"/>
                         </constraints>
                         <connections>
                             <outlet property="activityIndicatorView" destination="sCU-S1-yzh" id="Rid-Ml-eSW"/>

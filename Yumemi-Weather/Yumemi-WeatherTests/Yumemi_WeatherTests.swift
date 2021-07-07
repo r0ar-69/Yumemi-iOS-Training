@@ -8,7 +8,7 @@
 import XCTest
 @testable import Yumemi_Weather
 
-class Yumemi_WeatherTests: XCTestCase {
+final class Yumemi_WeatherTests: XCTestCase {
     
     var mainViewController: MainViewController!
     var weatherModel: WeatherModelMock!
@@ -23,7 +23,7 @@ class Yumemi_WeatherTests: XCTestCase {
     
     func test_天気が晴れの時WeatherImageViewに晴れの画像が設定される() throws {
         weatherModel.response = Response(maxTemp: 0, minTemp: 0, date: "2020-04-01T12:00:00+09:00", weather: "sunny")
-        weatherModel.fetchWeather(){ result in
+        weatherModel.fetchWeather { result in
             self.mainViewController.handleWeatherChange(result: result)
             XCTAssertEqual(self.mainViewController.weatherView.weatherImageView.tintColor, R.color.sun())
             XCTAssertEqual(self.mainViewController.weatherView.weatherImageView.image, R.image.sunny())
@@ -32,7 +32,7 @@ class Yumemi_WeatherTests: XCTestCase {
     
     func test_天気が曇りの時WeatherImageViewに曇りの画像が設定される() throws {
         weatherModel.response = Response(maxTemp: 0, minTemp: 0, date: "2020-04-01T12:00:00+09:00", weather: "cloudy")
-        weatherModel.fetchWeather(){ result in
+        weatherModel.fetchWeather { result in
             self.mainViewController.handleWeatherChange(result: result)
             XCTAssertEqual(self.mainViewController.weatherView.weatherImageView.tintColor, R.color.cloud())
             XCTAssertEqual(self.mainViewController.weatherView.weatherImageView.image, R.image.cloudy())
@@ -41,7 +41,7 @@ class Yumemi_WeatherTests: XCTestCase {
     
     func test天気が雨の時にWeatherImageViewに雨の画像が設定される() throws {
         weatherModel.response = Response(maxTemp: 0, minTemp: 0, date: "2020-04-01T12:00:00+09:00", weather: "rainy")
-        weatherModel.fetchWeather(){ result in
+        weatherModel.fetchWeather { result in
             self.mainViewController.handleWeatherChange(result: result)
             XCTAssertEqual(self.mainViewController.weatherView.weatherImageView.tintColor, R.color.umbrella())
             XCTAssertEqual(self.mainViewController.weatherView.weatherImageView.image, R.image.rainy())
@@ -50,7 +50,7 @@ class Yumemi_WeatherTests: XCTestCase {
     
     func test_気温がUILabelに設定される() throws {
         weatherModel.response = Response(maxTemp: 10, minTemp: 0, date: "2020-04-01T12:00:00+09:00", weather: "rainy")
-        weatherModel.fetchWeather(){ result in
+        weatherModel.fetchWeather { result in
             self.mainViewController.handleWeatherChange(result: result)
             XCTAssertEqual(self.mainViewController.weatherView.maxTempLabel.text, "10")
             XCTAssertEqual(self.mainViewController.weatherView.minTempLabel.text, "0")

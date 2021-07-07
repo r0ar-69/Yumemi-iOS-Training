@@ -8,7 +8,7 @@
 import XCTest
 @testable import Yumemi_Weather
 
-class JsonParserTests: XCTestCase {
+final class JsonParserTests: XCTestCase {
     
     let jsonPerser = JsonParser()
     
