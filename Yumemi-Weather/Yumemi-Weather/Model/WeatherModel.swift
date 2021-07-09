@@ -47,9 +47,9 @@ enum WeatherError: Error {
     
     init(error: YumemiWeatherError) {
         switch error {
-        case YumemiWeatherError.invalidParameterError:
+        case .invalidParameterError:
             self = .invalidParameterError
-        case YumemiWeatherError.unknownError:
+        case .unknownError:
             self = .unknownError
         }
     }

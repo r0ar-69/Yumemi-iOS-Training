@@ -13,7 +13,7 @@ final class WeatherView: UIView {
     @IBOutlet weak var weatherImageView: UIImageView!
     @IBOutlet weak var minTempLabel: UILabel!
     @IBOutlet weak var maxTempLabel: UILabel!
-    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
+    @IBOutlet private weak var activityIndicatorView: UIActivityIndicatorView!
     
     public func set(response: Response) {
         switch response.weather {
@@ -32,5 +32,13 @@ final class WeatherView: UIView {
         
         minTempLabel.text = String(response.minTemp)
         maxTempLabel.text = String(response.maxTemp)
+    }
+    
+    public func activityIndicatorViewStartAnimating() {
+        activityIndicatorView.startAnimating()
+    }
+    
+    public func activityIndicatorViewStopAnimating() {
+        activityIndicatorView.stopAnimating()
     }
 }

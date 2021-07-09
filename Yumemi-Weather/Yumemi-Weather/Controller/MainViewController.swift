@@ -17,10 +17,10 @@ final class MainViewController: UIViewController {
     }
     
     @IBAction func reloadButton(_ sender: Any) {
-        weatherView.activityIndicatorView.startAnimating()
+        weatherView.activityIndicatorViewStartAnimating()
         weatherModel.fetchWeather { result in
             DispatchQueue.main.async {
-                self.weatherView.activityIndicatorView.stopAnimating()
+                self.weatherView.activityIndicatorViewStopAnimating()
                 self.handleWeatherChange(result: result)
             }
         }
@@ -38,10 +38,10 @@ final class MainViewController: UIViewController {
     }
     
     @objc func viewWillEnterForeground(_ notification: Notification) {
-        weatherView.activityIndicatorView.startAnimating()
+        weatherView.activityIndicatorViewStartAnimating()
         weatherModel.fetchWeather { result in
             DispatchQueue.main.async {
-                self.weatherView.activityIndicatorView.stopAnimating()
+                self.weatherView.activityIndicatorViewStopAnimating()
                 self.handleWeatherChange(result: result)
             }
         }
@@ -49,15 +49,32 @@ final class MainViewController: UIViewController {
     
     func handleWeatherChange(result: Result<Response, Error>) {
         switch result {
-        case .success(let responce):
-            weatherView.set(response: responce)
+        case .success(let response):
+            weatherView.set(response: response)
         case .failure(let error):
             handleErrorOccurred(error: error)
         }
     }
     
     func handleErrorOccurred(error: Error) {
-        var message: String
+        let message = errorMessageFrom(error: error)
+        let alertController: UIAlertController = UIAlertController(
+            title:"Error",
+            message: message,
+            preferredStyle: .alert
+        )
+        let defaultAction: UIAlertAction = UIAlertAction(
+            title: "Close",
+            style: .default,
+            handler: nil
+        )
+        
+        alertController.addAction(defaultAction)
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func errorMessageFrom(error: Error) -> String {
+        let message: String
         
         switch error {
         case let error as WeatherError:
@@ -80,18 +97,6 @@ final class MainViewController: UIViewController {
             message = "Unknown Error Occurred"
         }
         
-        let alertController: UIAlertController = UIAlertController(
-            title:"Error",
-            message: message,
-            preferredStyle: .alert
-        )
-        let defaultAction: UIAlertAction = UIAlertAction(
-            title: "Close",
-            style: .default,
-            handler: nil
-        )
-        
-        alertController.addAction(defaultAction)
-        present(alertController, animated: true, completion: nil)
+        return message
     }
 }
