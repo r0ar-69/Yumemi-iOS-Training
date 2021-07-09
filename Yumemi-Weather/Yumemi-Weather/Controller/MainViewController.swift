@@ -57,7 +57,7 @@ final class MainViewController: UIViewController {
     }
     
     func handleErrorOccurred(error: Error) {
-        let message = errorMessageFrom(error: error)
+        let message = makeErrorMessage(from: error)
         let alertController: UIAlertController = UIAlertController(
             title:"Error",
             message: message,
@@ -73,7 +73,7 @@ final class MainViewController: UIViewController {
         present(alertController, animated: true, completion: nil)
     }
     
-    func errorMessageFrom(error: Error) -> String {
+    func makeErrorMessage(from error: Error) -> String {
         let message: String
         
         switch error {

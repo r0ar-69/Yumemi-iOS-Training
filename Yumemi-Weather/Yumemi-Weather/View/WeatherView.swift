@@ -10,9 +10,9 @@ import UIKit
 
 final class WeatherView: UIView {
     
-    @IBOutlet weak var weatherImageView: UIImageView!
-    @IBOutlet weak var minTempLabel: UILabel!
-    @IBOutlet weak var maxTempLabel: UILabel!
+    @IBOutlet private weak var weatherImageView: UIImageView!
+    @IBOutlet private weak var minTempLabel: UILabel!
+    @IBOutlet private weak var maxTempLabel: UILabel!
     @IBOutlet private weak var activityIndicatorView: UIActivityIndicatorView!
     
     public func set(response: Response) {
@@ -34,11 +34,11 @@ final class WeatherView: UIView {
         maxTempLabel.text = String(response.maxTemp)
     }
     
-    public func activityIndicatorViewStartAnimating() {
+    func activityIndicatorViewStartAnimating() {
         activityIndicatorView.startAnimating()
     }
     
-    public func activityIndicatorViewStopAnimating() {
+    func activityIndicatorViewStopAnimating() {
         activityIndicatorView.stopAnimating()
     }
 }
