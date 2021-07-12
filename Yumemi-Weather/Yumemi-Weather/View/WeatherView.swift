@@ -10,12 +10,12 @@ import UIKit
 
 final class WeatherView: UIView {
     
-    @IBOutlet private weak var weatherImageView: UIImageView!
-    @IBOutlet private weak var minTempLabel: UILabel!
-    @IBOutlet private weak var maxTempLabel: UILabel!
+    @IBOutlet private (set) weak var weatherImageView: UIImageView!
+    @IBOutlet private (set) weak var minTempLabel: UILabel!
+    @IBOutlet private (set) weak var maxTempLabel: UILabel!
     @IBOutlet private weak var activityIndicatorView: UIActivityIndicatorView!
     
-    public func set(response: Response) {
+    func set(response: Response) {
         switch response.weather {
         case "sunny":
             weatherImageView.image = R.image.sunny()
