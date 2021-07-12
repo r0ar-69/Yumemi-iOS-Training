@@ -70,6 +70,9 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="sCU-S1-yzh">
+                                <rect key="frame" x="0.0" y="570" width="414" height="80"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -79,10 +82,15 @@
                             <constraint firstItem="WC5-Pl-wDo" firstAttribute="centerX" secondItem="zKb-wx-4R7" secondAttribute="centerX" id="FUy-VM-PZt"/>
                             <constraint firstItem="D33-ee-SZO" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="JOw-lO-dj5"/>
                             <constraint firstItem="EKP-SR-QmB" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.5" id="Ufg-e3-fCY"/>
+                            <constraint firstItem="sCU-S1-yzh" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="WJb-Ac-NBm"/>
                             <constraint firstItem="1se-fi-sQi" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Yy1-Xt-nob"/>
+                            <constraint firstItem="sCU-S1-yzh" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="cgm-Tq-Ekm"/>
+                            <constraint firstItem="sCU-S1-yzh" firstAttribute="top" secondItem="D33-ee-SZO" secondAttribute="bottom" id="eST-qn-w3N"/>
                             <constraint firstItem="D33-ee-SZO" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="evm-IQ-GAK"/>
+                            <constraint firstItem="1se-fi-sQi" firstAttribute="top" secondItem="sCU-S1-yzh" secondAttribute="bottom" id="pcd-eG-cah"/>
                         </constraints>
                         <connections>
+                            <outlet property="activityIndicatorView" destination="sCU-S1-yzh" id="Rid-Ml-eSW"/>
                             <outlet property="maxTempLabel" destination="zKb-wx-4R7" id="epD-Fn-8Ef"/>
                             <outlet property="minTempLabel" destination="E0D-xf-iJl" id="dFT-A6-lm8"/>
                             <outlet property="weatherImageView" destination="EKP-SR-QmB" id="auK-CZ-OAm"/>

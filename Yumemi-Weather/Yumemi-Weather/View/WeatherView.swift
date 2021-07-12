@@ -7,15 +7,15 @@
 
 import Foundation
 import UIKit
-import Rswift
 
 final class WeatherView: UIView {
     
-    @IBOutlet weak var weatherImageView: UIImageView!
-    @IBOutlet weak var minTempLabel: UILabel!
-    @IBOutlet weak var maxTempLabel: UILabel!
+    @IBOutlet private (set) weak var weatherImageView: UIImageView!
+    @IBOutlet private (set) weak var minTempLabel: UILabel!
+    @IBOutlet private (set) weak var maxTempLabel: UILabel!
+    @IBOutlet private weak var activityIndicatorView: UIActivityIndicatorView!
     
-    public func set(response: Response) {
+    func set(response: Response) {
         switch response.weather {
         case "sunny":
             weatherImageView.image = R.image.sunny()
@@ -32,5 +32,13 @@ final class WeatherView: UIView {
         
         minTempLabel.text = String(response.minTemp)
         maxTempLabel.text = String(response.maxTemp)
+    }
+    
+    func activityIndicatorViewStartAnimating() {
+        activityIndicatorView.startAnimating()
+    }
+    
+    func activityIndicatorViewStopAnimating() {
+        activityIndicatorView.stopAnimating()
     }
 }

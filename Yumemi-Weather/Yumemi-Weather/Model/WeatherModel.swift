@@ -8,8 +8,8 @@
 import Foundation
 import YumemiWeather
 
-protocol  WeatherModel: AnyObject {
-    func fetchWeather() -> (Result<Response, Error>)
+protocol WeatherModel: AnyObject {
+    func fetchWeather(completion: @escaping (Result<Response, Error>) -> Void)
 }
 
 final class WeatherModelImpl: WeatherModel {
@@ -24,31 +24,33 @@ final class WeatherModelImpl: WeatherModel {
         return dateString
     }()
     
-    func fetchWeather() -> (Result<Response, Error>) {
-        do {
-            let request = try jsonParser.encode(from: Request(area: "tokyo", date: date))
-            let weather = try YumemiWeather.fetchWeather(request)
-            let weatherData: Response = try jsonParser.decode(from: weather)
-            
-            return .success(weatherData)
-        } catch {
-            switch error {
-            case YumemiWeatherError.invalidParameterError:
-                let err = WeatherError.invalidParameterError
-                return .failure(err)
-            case YumemiWeatherError.unknownError:
-                let err = WeatherError.unknownError
-                return .failure(err)
-            default:
-                return .failure(error)
+    func fetchWeather(completion: @escaping (Result<Response, Error>) -> Void) {
+        DispatchQueue.global().async {
+            do {
+                let request: String = try self.jsonParser.encode(from: Request(area: "tokyo", date: self.date))
+                let weather: String = try YumemiWeather.syncFetchWeather(request)
+                let weatherData: Response = try self.jsonParser.decode(from: weather)
+                
+                completion(.success(weatherData))
+            } catch let error as YumemiWeatherError {
+                completion(.failure(WeatherError(error: error)))
+            } catch {
+                completion(.failure(error))
             }
         }
     }
-    
-
 }
 
 enum WeatherError: Error {
     case invalidParameterError
     case unknownError
+    
+    init(error: YumemiWeatherError) {
+        switch error {
+        case .invalidParameterError:
+            self = .invalidParameterError
+        case .unknownError:
+            self = .unknownError
+        }
+    }
 }
