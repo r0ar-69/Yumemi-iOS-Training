@@ -7,10 +7,10 @@
 
 import UIKit
 
-final class MainViewController: UIViewController {
+final class MainViewController: UIViewController, WeatherModelDelegate{
     
     @IBOutlet var weatherView: WeatherView!
-    private (set) var weatherModel: WeatherModel = WeatherModelImpl()
+    private (set) var weatherModel = WeatherModelImpl()
     
     @IBAction func closeButton(_ sender: Any) {
         dismiss(animated: true)
@@ -18,17 +18,13 @@ final class MainViewController: UIViewController {
     
     @IBAction func reloadButton(_ sender: Any) {
         weatherView.activityIndicatorViewStartAnimating()
-        weatherModel.fetchWeather { result in
-            DispatchQueue.main.async {
-                self.weatherView.activityIndicatorViewStopAnimating()
-                self.handleWeatherChange(result: result)
-            }
-        }
+        weatherModel.fetchWeather()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        weatherModel.delegate = self
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(self.viewWillEnterForeground(_:)),
@@ -37,13 +33,19 @@ final class MainViewController: UIViewController {
         )
     }
     
+    deinit {
+        print("deinit called")
+    }
+    
     @objc func viewWillEnterForeground(_ notification: Notification) {
         weatherView.activityIndicatorViewStartAnimating()
-        weatherModel.fetchWeather { result in
-            DispatchQueue.main.async {
-                self.weatherView.activityIndicatorViewStopAnimating()
-                self.handleWeatherChange(result: result)
-            }
+        weatherModel.fetchWeather()
+    }
+    
+    func fetchWeatherDidFinished(result: Result<Response, Error>) {
+        DispatchQueue.main.async {
+            self.weatherView.activityIndicatorViewStopAnimating()
+            self.handleWeatherChange(result: result)
         }
     }
     
