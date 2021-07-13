@@ -52,8 +52,11 @@ final class Yumemi_WeatherTests: XCTestCase {
 }
 
 extension Yumemi_WeatherTests: WeatherModelDelegate {
-    func fetchWeatherDidFinished(result: Result<Response, Error>) {
-        mainViewController.handleWeatherChange(result: result)
+    func fetchWeatherDidSucceed(response: Response) {
+        mainViewController.weatherView.set(response: response)
+    }
+    
+    func fetchWeatherDidFail(error: Error) {
     }
 }
 
@@ -62,6 +65,6 @@ class WeatherModelMock: WeatherModel {
     weak var delegate: WeatherModelDelegate?
     
     func fetchWeather() {
-        delegate?.fetchWeatherDidFinished(result: .success(response))
+        delegate?.fetchWeatherDidSucceed(response: response)
     }
 }

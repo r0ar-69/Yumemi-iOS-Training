@@ -9,11 +9,13 @@ import Foundation
 import YumemiWeather
 
 protocol WeatherModel: AnyObject {
+    var delegate: WeatherModelDelegate? { get set }
     func fetchWeather()
 }
 
 protocol WeatherModelDelegate: AnyObject {
-    func fetchWeatherDidFinished(result: Result<Response, Error>)
+    func fetchWeatherDidSucceed(response: Response)
+    func fetchWeatherDidFail(error: Error)
 }
 
 final class WeatherModelImpl: WeatherModel {
@@ -36,11 +38,11 @@ final class WeatherModelImpl: WeatherModel {
                 let weather: String = try YumemiWeather.syncFetchWeather(request)
                 let weatherData: Response = try self.jsonParser.decode(from: weather)
                 
-                self.delegate?.fetchWeatherDidFinished(result: .success(weatherData))
+                self.delegate?.fetchWeatherDidSucceed(response: weatherData)
             } catch let error as YumemiWeatherError {
-                self.delegate?.fetchWeatherDidFinished(result: .failure(WeatherError(error: error)))
+                self.delegate?.fetchWeatherDidFail(error: WeatherError(error: error))
             } catch {
-                self.delegate?.fetchWeatherDidFinished(result: .failure(error))
+                self.delegate?.fetchWeatherDidFail(error: error)
             }
         }
     }

@@ -7,10 +7,10 @@
 
 import UIKit
 
-final class MainViewController: UIViewController, WeatherModelDelegate{
+final class MainViewController: UIViewController{
     
     @IBOutlet var weatherView: WeatherView!
-    private (set) var weatherModel = WeatherModelImpl()
+    private (set) var weatherModel: WeatherModel = WeatherModelImpl()
     
     @IBAction func closeButton(_ sender: Any) {
         dismiss(animated: true)
@@ -40,22 +40,6 @@ final class MainViewController: UIViewController, WeatherModelDelegate{
     @objc func viewWillEnterForeground(_ notification: Notification) {
         weatherView.activityIndicatorViewStartAnimating()
         weatherModel.fetchWeather()
-    }
-    
-    func fetchWeatherDidFinished(result: Result<Response, Error>) {
-        DispatchQueue.main.async {
-            self.weatherView.activityIndicatorViewStopAnimating()
-            self.handleWeatherChange(result: result)
-        }
-    }
-    
-    func handleWeatherChange(result: Result<Response, Error>) {
-        switch result {
-        case .success(let response):
-            weatherView.set(response: response)
-        case .failure(let error):
-            handleErrorOccurred(error: error)
-        }
     }
     
     func handleErrorOccurred(error: Error) {
@@ -100,5 +84,21 @@ final class MainViewController: UIViewController, WeatherModelDelegate{
         }
         
         return message
+    }
+}
+
+extension MainViewController: WeatherModelDelegate {
+    func fetchWeatherDidSucceed(response: Response) {
+        DispatchQueue.main.async {
+            self.weatherView.activityIndicatorViewStopAnimating()
+            self.weatherView.set(response: response)
+        }
+    }
+    
+    func fetchWeatherDidFail(error: Error) {
+        DispatchQueue.main.async {
+            self.weatherView.activityIndicatorViewStopAnimating()
+            self.handleErrorOccurred(error: error)
+        }
     }
 }
