@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class MainViewController: UIViewController{
+final class MainViewController: UIViewController {
     
     @IBOutlet var weatherView: WeatherView!
     private (set) var weatherModel: WeatherModel = WeatherModelImpl()
@@ -18,13 +18,22 @@ final class MainViewController: UIViewController{
     
     @IBAction func reloadButton(_ sender: Any) {
         weatherView.activityIndicatorViewStartAnimating()
-        weatherModel.fetchWeather()
+        weatherModel.fetchWeather(onSuccess: {response in
+            DispatchQueue.main.async {
+                self.weatherView.activityIndicatorViewStopAnimating()
+                self.weatherView.set(response: response)
+            }
+        }, onError: { error in
+            DispatchQueue.main.async {
+                self.weatherView.activityIndicatorViewStopAnimating()
+                self.handleErrorOccurred(error: error)
+            }
+        })
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        weatherModel.delegate = self
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(self.viewWillEnterForeground(_:)),
@@ -39,7 +48,17 @@ final class MainViewController: UIViewController{
     
     @objc func viewWillEnterForeground(_ notification: Notification) {
         weatherView.activityIndicatorViewStartAnimating()
-        weatherModel.fetchWeather()
+        weatherModel.fetchWeather(onSuccess: {response in
+            DispatchQueue.main.async {
+                self.weatherView.activityIndicatorViewStopAnimating()
+                self.weatherView.set(response: response)
+            }
+        }, onError: { error in
+            DispatchQueue.main.async {
+                self.weatherView.activityIndicatorViewStopAnimating()
+                self.handleErrorOccurred(error: error)
+            }
+        })
     }
     
     func handleErrorOccurred(error: Error) {
@@ -84,21 +103,5 @@ final class MainViewController: UIViewController{
         }
         
         return message
-    }
-}
-
-extension MainViewController: WeatherModelDelegate {
-    func fetchWeatherDidSucceed(response: Response) {
-        DispatchQueue.main.async {
-            self.weatherView.activityIndicatorViewStopAnimating()
-            self.weatherView.set(response: response)
-        }
-    }
-    
-    func fetchWeatherDidFail(error: Error) {
-        DispatchQueue.main.async {
-            self.weatherView.activityIndicatorViewStopAnimating()
-            self.handleErrorOccurred(error: error)
-        }
     }
 }
