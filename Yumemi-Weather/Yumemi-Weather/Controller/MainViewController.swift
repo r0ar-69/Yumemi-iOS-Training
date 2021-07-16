@@ -11,24 +11,14 @@ final class MainViewController: UIViewController {
     
     @IBOutlet var weatherView: WeatherView!
     private (set) var weatherModel: WeatherModel = WeatherModelImpl()
+    private (set) var alertController: UIAlertController!
     
     @IBAction func closeButton(_ sender: Any) {
         dismiss(animated: true)
     }
     
     @IBAction func reloadButton(_ sender: Any) {
-        weatherView.activityIndicatorViewStartAnimating()
-        weatherModel.fetchWeather(onSuccess: {response in
-            DispatchQueue.main.async {
-                self.weatherView.activityIndicatorViewStopAnimating()
-                self.weatherView.set(response: response)
-            }
-        }, onError: { error in
-            DispatchQueue.main.async {
-                self.weatherView.activityIndicatorViewStopAnimating()
-                self.handleErrorOccurred(error: error)
-            }
-        })
+        reloadWeather()
     }
     
     override func viewDidLoad() {
@@ -47,6 +37,10 @@ final class MainViewController: UIViewController {
     }
     
     @objc func viewWillEnterForeground(_ notification: Notification) {
+        reloadWeather()
+    }
+    
+    func reloadWeather() {
         weatherView.activityIndicatorViewStartAnimating()
         weatherModel.fetchWeather(onSuccess: {response in
             DispatchQueue.main.async {
@@ -63,7 +57,7 @@ final class MainViewController: UIViewController {
     
     func handleErrorOccurred(error: Error) {
         let message = makeErrorMessage(from: error)
-        let alertController: UIAlertController = UIAlertController(
+        alertController = UIAlertController(
             title:"Error",
             message: message,
             preferredStyle: .alert

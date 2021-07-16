@@ -33,9 +33,9 @@ final class WeatherModelImpl: WeatherModel {
                 
                 onSuccess(weatherData)
             } catch let error as YumemiWeatherError {
-                onError!(WeatherError(error: error))
+                onError?(WeatherError(error: error))
             } catch {
-                onError!(error)
+                onError?(error)
             }
         }
     }

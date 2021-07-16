@@ -56,6 +56,14 @@ final class Yumemi_WeatherTests: XCTestCase {
             XCTAssertEqual(self.mainViewController.weatherView.minTempLabel.text, "0")
         }, onError: nil)
     }
+    
+    func test_onErrorが呼び出された時のテスト() {
+        let weatherModel = WeatherModelMockWhenFetchWeatherFail()
+        weatherModel.fetchWeather(onSuccess: { response in }, onError: { error in
+            self.mainViewController.handleErrorOccurred(error: error)
+            XCTAssertEqual(self.mainViewController.alertController.message, self.mainViewController.makeErrorMessage(from: error))
+        })
+    }
 }
 
 class WeatherModelMock: WeatherModel {
@@ -63,5 +71,11 @@ class WeatherModelMock: WeatherModel {
     
     func fetchWeather(onSuccess: @escaping (Response) -> Void, onError: ((Error) -> Void)?) {
         onSuccess(response)
+    }
+}
+
+class WeatherModelMockWhenFetchWeatherFail: WeatherModel {
+    func fetchWeather(onSuccess: @escaping (Response) -> Void, onError: ((Error) -> Void)?) {
+        onError?(JsonError.convertError)
     }
 }
