@@ -59,9 +59,15 @@ final class Yumemi_WeatherTests: XCTestCase {
     
     func test_onErrorが呼び出された時のテスト() {
         let weatherModel = WeatherModelMockWhenFetchWeatherFail()
+        let alertView = AlertViewMock()
+        
         weatherModel.fetchWeather(onSuccess: { response in }, onError: { error in
-            self.mainViewController.handleErrorOccurred(error: error)
-            XCTAssertEqual(self.mainViewController.alertController.message, self.mainViewController.makeErrorMessage(from: error))
+            let message = self.mainViewController.makeErrorMessage(from: error)
+            
+            alertView.showAlertView(title: "title", message: message)
+            XCTAssertTrue(alertView.showAlertView_wasCalled)
+            XCTAssertEqual(alertView.showAlertView_wasCalled_withArgs?.title, "title")
+            XCTAssertEqual(alertView.showAlertView_wasCalled_withArgs?.message, message)
         })
     }
 }
@@ -77,5 +83,15 @@ class WeatherModelMock: WeatherModel {
 class WeatherModelMockWhenFetchWeatherFail: WeatherModel {
     func fetchWeather(onSuccess: @escaping (Response) -> Void, onError: ((Error) -> Void)?) {
         onError?(JsonError.convertError)
+    }
+}
+
+class AlertViewMock: AlertViewPresenter {
+    var showAlertView_wasCalled = false
+    var showAlertView_wasCalled_withArgs: (title: String, message: String)? = nil
+    
+    func showAlertView(title: String, message: String) {
+        showAlertView_wasCalled = true
+        showAlertView_wasCalled_withArgs = (title: title, message: message)
     }
 }

@@ -7,11 +7,14 @@
 
 import UIKit
 
+protocol AlertViewPresenter {
+    func showAlertView(title: String, message: String)
+}
+
 final class MainViewController: UIViewController {
     
     @IBOutlet var weatherView: WeatherView!
     private (set) var weatherModel: WeatherModel = WeatherModelImpl()
-    private (set) var alertController: UIAlertController!
     
     @IBAction func closeButton(_ sender: Any) {
         dismiss(animated: true)
@@ -57,19 +60,8 @@ final class MainViewController: UIViewController {
     
     func handleErrorOccurred(error: Error) {
         let message = makeErrorMessage(from: error)
-        alertController = UIAlertController(
-            title:"Error",
-            message: message,
-            preferredStyle: .alert
-        )
-        let defaultAction: UIAlertAction = UIAlertAction(
-            title: "Close",
-            style: .default,
-            handler: nil
-        )
         
-        alertController.addAction(defaultAction)
-        present(alertController, animated: true, completion: nil)
+        showAlertView(title: "Error", message: message)
     }
     
     func makeErrorMessage(from error: Error) -> String {
@@ -97,5 +89,23 @@ final class MainViewController: UIViewController {
         }
         
         return message
+    }
+}
+
+extension MainViewController: AlertViewPresenter {
+    func showAlertView(title: String, message: String) {
+        let alertController: UIAlertController = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert
+        )
+        let defaultAction: UIAlertAction = UIAlertAction(
+            title: "Close",
+            style: .default,
+            handler: nil
+        )
+        
+        alertController.addAction(defaultAction)
+        present(alertController, animated: true, completion: nil)
     }
 }
