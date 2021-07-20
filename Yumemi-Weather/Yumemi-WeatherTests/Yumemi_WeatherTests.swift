@@ -57,17 +57,19 @@ final class Yumemi_WeatherTests: XCTestCase {
         }, onError: nil)
     }
     
-    func test_onErrorが呼び出された時のテスト() {
+    func test_onErrorが呼び出された時にalertViewが表示される() {
         let weatherModel = WeatherModelMockWhenFetchWeatherFail()
-        let alertView = AlertViewMock()
+        var alertView = AlertViewMock()
+        mainViewController.alertView = AlertViewMock()
         
         weatherModel.fetchWeather(onSuccess: { response in }, onError: { error in
-            let message = self.mainViewController.makeErrorMessage(from: error)
+            self.mainViewController.alertView.present(title: "タイトル", message: "メッセージ", presentingViewController: UIViewController())
+            alertView = self.mainViewController.alertView as! AlertViewMock
             
-            alertView.showAlertView(title: "title", message: message)
-            XCTAssertTrue(alertView.showAlertView_wasCalled)
-            XCTAssertEqual(alertView.showAlertView_wasCalled_withArgs?.title, "title")
-            XCTAssertEqual(alertView.showAlertView_wasCalled_withArgs?.message, message)
+            XCTAssertTrue(alertView.present_wasCalled)
+            XCTAssertEqual(alertView.present_wasCalled_withArgs?.title, "タイトル")
+            XCTAssertEqual(alertView.present_wasCalled_withArgs?.message, "メッセージ")
+            XCTAssertNotNil(alertView.present_wasCalled_withArgs?.presentingVC)
         })
     }
 }
@@ -87,11 +89,11 @@ class WeatherModelMockWhenFetchWeatherFail: WeatherModel {
 }
 
 class AlertViewMock: AlertViewPresenter {
-    var showAlertView_wasCalled = false
-    var showAlertView_wasCalled_withArgs: (title: String, message: String)? = nil
+    var present_wasCalled = false
+    var present_wasCalled_withArgs: (title: String, message: String, presentingVC: UIViewController)? = nil
     
-    func showAlertView(title: String, message: String) {
-        showAlertView_wasCalled = true
-        showAlertView_wasCalled_withArgs = (title: title, message: message)
+    func present(title: String, message: String, presentingViewController: UIViewController) {
+        present_wasCalled = true
+        present_wasCalled_withArgs = (title: title, message: message, presentingVC: presentingViewController)
     }
 }

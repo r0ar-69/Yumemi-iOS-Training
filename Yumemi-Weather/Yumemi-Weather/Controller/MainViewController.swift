@@ -7,14 +7,15 @@
 
 import UIKit
 
-protocol AlertViewPresenter {
-    func showAlertView(title: String, message: String)
+protocol AlertViewPresenter: AnyObject {
+    func present(title: String, message: String, presentingViewController: UIViewController)
 }
 
 final class MainViewController: UIViewController {
     
     @IBOutlet var weatherView: WeatherView!
     private (set) var weatherModel: WeatherModel = WeatherModelImpl()
+    var alertView: AlertViewPresenter = AlertViewPresenterImpl()
     
     @IBAction func closeButton(_ sender: Any) {
         dismiss(animated: true)
@@ -46,14 +47,14 @@ final class MainViewController: UIViewController {
     func reloadWeather() {
         weatherView.activityIndicatorViewStartAnimating()
         weatherModel.fetchWeather(onSuccess: {response in
-            DispatchQueue.main.async {
-                self.weatherView.activityIndicatorViewStopAnimating()
-                self.weatherView.set(response: response)
+            DispatchQueue.main.async { [weak self] in
+                self?.weatherView.activityIndicatorViewStopAnimating()
+                self?.weatherView.set(response: response)
             }
-        }, onError: { error in
+        }, onError: { [weak self] error in
             DispatchQueue.main.async {
-                self.weatherView.activityIndicatorViewStopAnimating()
-                self.handleErrorOccurred(error: error)
+                self?.weatherView.activityIndicatorViewStopAnimating()
+                self?.handleErrorOccurred(error: error)
             }
         })
     }
@@ -61,7 +62,7 @@ final class MainViewController: UIViewController {
     func handleErrorOccurred(error: Error) {
         let message = makeErrorMessage(from: error)
         
-        showAlertView(title: "Error", message: message)
+        alertView.present(title: "Error", message: message, presentingViewController: self)
     }
     
     func makeErrorMessage(from error: Error) -> String {
@@ -92,8 +93,8 @@ final class MainViewController: UIViewController {
     }
 }
 
-extension MainViewController: AlertViewPresenter {
-    func showAlertView(title: String, message: String) {
+final class AlertViewPresenterImpl : AlertViewPresenter {
+    func present(title: String, message: String, presentingViewController: UIViewController) {
         let alertController: UIAlertController = UIAlertController(
             title: title,
             message: message,
@@ -106,6 +107,6 @@ extension MainViewController: AlertViewPresenter {
         )
         
         alertController.addAction(defaultAction)
-        present(alertController, animated: true, completion: nil)
+        presentingViewController.present(alertController, animated: true)
     }
 }
