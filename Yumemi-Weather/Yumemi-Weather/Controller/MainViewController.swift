@@ -54,18 +54,14 @@ final class MainViewController: UIViewController {
         }, onError: { [weak self] error in
             DispatchQueue.main.async {
                 self?.weatherView.activityIndicatorViewStopAnimating()
-                self?.handleErrorOccurred(error: error)
+                if let message = self?.makeErrorMessage(from: error) {
+                    self!.alertView.present(title: "Error", message: message, presentingViewController: self!)
+                }
             }
         })
     }
     
-    func handleErrorOccurred(error: Error) {
-        let message = makeErrorMessage(from: error)
-        
-        alertView.present(title: "Error", message: message, presentingViewController: self)
-    }
-    
-    func makeErrorMessage(from error: Error) -> String {
+    private func makeErrorMessage(from error: Error) -> String {
         let message: String
         
         switch error {
@@ -90,23 +86,5 @@ final class MainViewController: UIViewController {
         }
         
         return message
-    }
-}
-
-final class AlertViewPresenterImpl : AlertViewPresenter {
-    func present(title: String, message: String, presentingViewController: UIViewController) {
-        let alertController: UIAlertController = UIAlertController(
-            title: title,
-            message: message,
-            preferredStyle: .alert
-        )
-        let defaultAction: UIAlertAction = UIAlertAction(
-            title: "Close",
-            style: .default,
-            handler: nil
-        )
-        
-        alertController.addAction(defaultAction)
-        presentingViewController.present(alertController, animated: true)
     }
 }

@@ -60,7 +60,7 @@ final class Yumemi_WeatherTests: XCTestCase {
     func test_onErrorが呼び出された時にalertViewが表示される() {
         let weatherModel = WeatherModelMockWhenFetchWeatherFail()
         var alertView = AlertViewMock()
-        mainViewController.alertView = AlertViewMock()
+        mainViewController.alertView = alertView
         
         weatherModel.fetchWeather(onSuccess: { response in }, onError: { error in
             self.mainViewController.alertView.present(title: "タイトル", message: "メッセージ", presentingViewController: UIViewController())
