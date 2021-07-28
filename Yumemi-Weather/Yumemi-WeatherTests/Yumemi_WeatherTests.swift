@@ -16,7 +16,6 @@ final class Yumemi_WeatherTests: XCTestCase {
     
     override func setUpWithError() throws {
         weatherModel = WeatherModelMock()
-        weatherModel.delegate = self
         mainViewController = R.storyboard.main.mainViewController()!
         _ = mainViewController.view
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -24,47 +23,85 @@ final class Yumemi_WeatherTests: XCTestCase {
     
     func test_天気が晴れの時WeatherImageViewに晴れの画像が設定される() throws {
         weatherModel.response = Response(maxTemp: 0, minTemp: 0, date: "2020-04-01T12:00:00+09:00", weather: "sunny")
-        weatherModel.fetchWeather()
-        XCTAssertEqual(self.mainViewController.weatherView.weatherImageView.tintColor, R.color.sun())
-        XCTAssertEqual(self.mainViewController.weatherView.weatherImageView.image, R.image.sunny())
+        weatherModel.fetchWeather(onSuccess: { response in
+            self.mainViewController.weatherView.set(response: response)
+            XCTAssertEqual(self.mainViewController.weatherView.weatherImageView.tintColor, R.color.sun())
+            XCTAssertEqual(self.mainViewController.weatherView.weatherImageView.image, R.image.sunny())
+        }, onError: { _ in
+            XCTFail()
+        })
     }
     
     func test_天気が曇りの時WeatherImageViewに曇りの画像が設定される() throws {
         weatherModel.response = Response(maxTemp: 0, minTemp: 0, date: "2020-04-01T12:00:00+09:00", weather: "cloudy")
-        weatherModel.fetchWeather()
-        XCTAssertEqual(self.mainViewController.weatherView.weatherImageView.tintColor, R.color.cloud())
-        XCTAssertEqual(self.mainViewController.weatherView.weatherImageView.image, R.image.cloudy())
+        weatherModel.fetchWeather(onSuccess: { response in
+            self.mainViewController.weatherView.set(response: response)
+            XCTAssertEqual(self.mainViewController.weatherView.weatherImageView.tintColor, R.color.cloud())
+            XCTAssertEqual(self.mainViewController.weatherView.weatherImageView.image, R.image.cloudy())
+        }, onError: { _ in
+            XCTFail()
+        })
     }
     
     func test天気が雨の時にWeatherImageViewに雨の画像が設定される() throws {
         weatherModel.response = Response(maxTemp: 0, minTemp: 0, date: "2020-04-01T12:00:00+09:00", weather: "rainy")
-        weatherModel.fetchWeather()
-        XCTAssertEqual(self.mainViewController.weatherView.weatherImageView.tintColor, R.color.umbrella())
-        XCTAssertEqual(self.mainViewController.weatherView.weatherImageView.image, R.image.rainy())
+        weatherModel.fetchWeather(onSuccess: { response in
+            self.mainViewController.weatherView.set(response: response)
+            XCTAssertEqual(self.mainViewController.weatherView.weatherImageView.tintColor, R.color.umbrella())
+            XCTAssertEqual(self.mainViewController.weatherView.weatherImageView.image, R.image.rainy())
+        }, onError: { _ in
+            XCTFail()
+        })
     }
     
     func test_気温がUILabelに設定される() throws {
         weatherModel.response = Response(maxTemp: 10, minTemp: 0, date: "2020-04-01T12:00:00+09:00", weather: "rainy")
-        weatherModel.fetchWeather()
-        XCTAssertEqual(self.mainViewController.weatherView.maxTempLabel.text, "10")
-        XCTAssertEqual(self.mainViewController.weatherView.minTempLabel.text, "0")
-    }
-}
-
-extension Yumemi_WeatherTests: WeatherModelDelegate {
-    func fetchWeatherDidSucceed(response: Response) {
-        mainViewController.weatherView.set(response: response)
+        weatherModel.fetchWeather(onSuccess: { response in
+            self.mainViewController.weatherView.set(response: response)
+            XCTAssertEqual(self.mainViewController.weatherView.maxTempLabel.text, "10")
+            XCTAssertEqual(self.mainViewController.weatherView.minTempLabel.text, "0")
+        }, onError: { _ in
+            XCTFail()
+        })
     }
     
-    func fetchWeatherDidFail(error: Error) {
+    func test_onErrorが呼び出された時にalertViewが表示される() {
+        let weatherModel = WeatherModelMockWhenFetchWeatherFail()
+        var alertView = AlertViewMock()
+        mainViewController.alertView = alertView
+        
+        weatherModel.fetchWeather(onSuccess: { response in }, onError: { error in
+            self.mainViewController.alertView.present(title: "タイトル", message: "メッセージ", presentingViewController: UIViewController())
+            alertView = self.mainViewController.alertView as! AlertViewMock
+            
+            XCTAssertTrue(alertView.present_wasCalled)
+            XCTAssertEqual(alertView.present_wasCalled_withArgs?.title, "タイトル")
+            XCTAssertEqual(alertView.present_wasCalled_withArgs?.message, "メッセージ")
+            XCTAssertNotNil(alertView.present_wasCalled_withArgs?.presentingVC)
+        })
     }
 }
 
 class WeatherModelMock: WeatherModel {
     var response: Response = Response(maxTemp: 0, minTemp: 0, date: "", weather: "")
-    weak var delegate: WeatherModelDelegate?
     
-    func fetchWeather() {
-        delegate?.fetchWeatherDidSucceed(response: response)
+    func fetchWeather(onSuccess: @escaping (Response) -> Void, onError: ((Error) -> Void)?) {
+        onSuccess(response)
+    }
+}
+
+class WeatherModelMockWhenFetchWeatherFail: WeatherModel {
+    func fetchWeather(onSuccess: @escaping (Response) -> Void, onError: ((Error) -> Void)?) {
+        onError?(JsonError.convertError)
+    }
+}
+
+class AlertViewMock: AlertViewPresenter {
+    var present_wasCalled = false
+    var present_wasCalled_withArgs: (title: String, message: String, presentingVC: UIViewController)? = nil
+    
+    func present(title: String, message: String, presentingViewController: UIViewController) {
+        present_wasCalled = true
+        present_wasCalled_withArgs = (title: title, message: message, presentingVC: presentingViewController)
     }
 }

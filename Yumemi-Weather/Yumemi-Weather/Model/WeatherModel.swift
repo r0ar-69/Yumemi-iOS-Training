@@ -9,17 +9,10 @@ import Foundation
 import YumemiWeather
 
 protocol WeatherModel: AnyObject {
-    var delegate: WeatherModelDelegate? { get set }
-    func fetchWeather()
-}
-
-protocol WeatherModelDelegate: AnyObject {
-    func fetchWeatherDidSucceed(response: Response)
-    func fetchWeatherDidFail(error: Error)
+    func fetchWeather(onSuccess: @escaping (Response) -> Void, onError: ((Error) -> Void)?)
 }
 
 final class WeatherModelImpl: WeatherModel {
-    weak var delegate: WeatherModelDelegate?
     let jsonParser = JsonParser()
     
     private let date: String = {
@@ -31,18 +24,18 @@ final class WeatherModelImpl: WeatherModel {
         return dateString
     }()
     
-    func fetchWeather() {
+    func fetchWeather(onSuccess: @escaping (Response) -> Void, onError: ((Error) -> Void)?) {
         DispatchQueue.global().async {
             do {
                 let request: String = try self.jsonParser.encode(from: Request(area: "tokyo", date: self.date))
                 let weather: String = try YumemiWeather.syncFetchWeather(request)
                 let weatherData: Response = try self.jsonParser.decode(from: weather)
                 
-                self.delegate?.fetchWeatherDidSucceed(response: weatherData)
+                onSuccess(weatherData)
             } catch let error as YumemiWeatherError {
-                self.delegate?.fetchWeatherDidFail(error: WeatherError(error: error))
+                onError?(WeatherError(error: error))
             } catch {
-                self.delegate?.fetchWeatherDidFail(error: error)
+                onError?(error)
             }
         }
     }

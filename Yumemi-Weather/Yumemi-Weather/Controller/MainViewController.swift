@@ -7,24 +7,27 @@
 
 import UIKit
 
-final class MainViewController: UIViewController{
+protocol AlertViewPresenter: AnyObject {
+    func present(title: String, message: String, presentingViewController: UIViewController)
+}
+
+final class MainViewController: UIViewController {
     
     @IBOutlet var weatherView: WeatherView!
     private (set) var weatherModel: WeatherModel = WeatherModelImpl()
+    var alertView: AlertViewPresenter = AlertViewPresenterImpl()
     
     @IBAction func closeButton(_ sender: Any) {
         dismiss(animated: true)
     }
     
     @IBAction func reloadButton(_ sender: Any) {
-        weatherView.activityIndicatorViewStartAnimating()
-        weatherModel.fetchWeather()
+        reloadWeather()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        weatherModel.delegate = self
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(self.viewWillEnterForeground(_:)),
@@ -38,28 +41,28 @@ final class MainViewController: UIViewController{
     }
     
     @objc func viewWillEnterForeground(_ notification: Notification) {
+        reloadWeather()
+    }
+    
+    func reloadWeather() {
         weatherView.activityIndicatorViewStartAnimating()
-        weatherModel.fetchWeather()
+        weatherModel.fetchWeather(onSuccess: {response in
+            DispatchQueue.main.async { [weak self] in
+                self?.weatherView.activityIndicatorViewStopAnimating()
+                self?.weatherView.set(response: response)
+            }
+        }, onError: { [weak self] error in
+            DispatchQueue.main.async {
+                if let self = self {
+                    self.weatherView.activityIndicatorViewStopAnimating()
+                    let message = self.makeErrorMessage(from: error)
+                    self.alertView.present(title: "Error", message: message, presentingViewController: self)
+                }
+            }
+        })
     }
     
-    func handleErrorOccurred(error: Error) {
-        let message = makeErrorMessage(from: error)
-        let alertController: UIAlertController = UIAlertController(
-            title:"Error",
-            message: message,
-            preferredStyle: .alert
-        )
-        let defaultAction: UIAlertAction = UIAlertAction(
-            title: "Close",
-            style: .default,
-            handler: nil
-        )
-        
-        alertController.addAction(defaultAction)
-        present(alertController, animated: true, completion: nil)
-    }
-    
-    func makeErrorMessage(from error: Error) -> String {
+    private func makeErrorMessage(from error: Error) -> String {
         let message: String
         
         switch error {
@@ -84,21 +87,5 @@ final class MainViewController: UIViewController{
         }
         
         return message
-    }
-}
-
-extension MainViewController: WeatherModelDelegate {
-    func fetchWeatherDidSucceed(response: Response) {
-        DispatchQueue.main.async {
-            self.weatherView.activityIndicatorViewStopAnimating()
-            self.weatherView.set(response: response)
-        }
-    }
-    
-    func fetchWeatherDidFail(error: Error) {
-        DispatchQueue.main.async {
-            self.weatherView.activityIndicatorViewStopAnimating()
-            self.handleErrorOccurred(error: error)
-        }
     }
 }
