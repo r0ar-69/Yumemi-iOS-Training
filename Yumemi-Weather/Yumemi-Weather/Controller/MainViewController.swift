@@ -53,9 +53,10 @@ final class MainViewController: UIViewController {
             }
         }, onError: { [weak self] error in
             DispatchQueue.main.async {
-                self?.weatherView.activityIndicatorViewStopAnimating()
-                if let message = self?.makeErrorMessage(from: error) {
-                    self?.alertView.present(title: "Error", message: message, presentingViewController: self!)
+                if let self = self {
+                    self.weatherView.activityIndicatorViewStopAnimating()
+                    let message = self.makeErrorMessage(from: error)
+                    self.alertView.present(title: "Error", message: message, presentingViewController: self)
                 }
             }
         })
