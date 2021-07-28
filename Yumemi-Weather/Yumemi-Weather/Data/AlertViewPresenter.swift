@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class AlertViewPresenterImpl : AlertViewPresenter {
+final class AlertViewPresenterImpl: AlertViewPresenter {
     func present(title: String, message: String, presentingViewController: UIViewController) {
         let alertController: UIAlertController = UIAlertController(
             title: title,

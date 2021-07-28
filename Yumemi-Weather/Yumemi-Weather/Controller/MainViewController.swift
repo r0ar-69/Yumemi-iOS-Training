@@ -55,7 +55,7 @@ final class MainViewController: UIViewController {
             DispatchQueue.main.async {
                 self?.weatherView.activityIndicatorViewStopAnimating()
                 if let message = self?.makeErrorMessage(from: error) {
-                    self!.alertView.present(title: "Error", message: message, presentingViewController: self!)
+                    self?.alertView.present(title: "Error", message: message, presentingViewController: self!)
                 }
             }
         })

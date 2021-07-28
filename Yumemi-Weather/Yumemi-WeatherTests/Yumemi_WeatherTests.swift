@@ -27,7 +27,9 @@ final class Yumemi_WeatherTests: XCTestCase {
             self.mainViewController.weatherView.set(response: response)
             XCTAssertEqual(self.mainViewController.weatherView.weatherImageView.tintColor, R.color.sun())
             XCTAssertEqual(self.mainViewController.weatherView.weatherImageView.image, R.image.sunny())
-        }, onError: nil)
+        }, onError: { _ in
+            XCTFail()
+        })
     }
     
     func test_天気が曇りの時WeatherImageViewに曇りの画像が設定される() throws {
@@ -36,7 +38,9 @@ final class Yumemi_WeatherTests: XCTestCase {
             self.mainViewController.weatherView.set(response: response)
             XCTAssertEqual(self.mainViewController.weatherView.weatherImageView.tintColor, R.color.cloud())
             XCTAssertEqual(self.mainViewController.weatherView.weatherImageView.image, R.image.cloudy())
-        }, onError: nil)
+        }, onError: { _ in
+            XCTFail()
+        })
     }
     
     func test天気が雨の時にWeatherImageViewに雨の画像が設定される() throws {
@@ -45,7 +49,9 @@ final class Yumemi_WeatherTests: XCTestCase {
             self.mainViewController.weatherView.set(response: response)
             XCTAssertEqual(self.mainViewController.weatherView.weatherImageView.tintColor, R.color.umbrella())
             XCTAssertEqual(self.mainViewController.weatherView.weatherImageView.image, R.image.rainy())
-        }, onError: nil)
+        }, onError: { _ in
+            XCTFail()
+        })
     }
     
     func test_気温がUILabelに設定される() throws {
@@ -54,7 +60,9 @@ final class Yumemi_WeatherTests: XCTestCase {
             self.mainViewController.weatherView.set(response: response)
             XCTAssertEqual(self.mainViewController.weatherView.maxTempLabel.text, "10")
             XCTAssertEqual(self.mainViewController.weatherView.minTempLabel.text, "0")
-        }, onError: nil)
+        }, onError: { _ in
+            XCTFail()
+        })
     }
     
     func test_onErrorが呼び出された時にalertViewが表示される() {
